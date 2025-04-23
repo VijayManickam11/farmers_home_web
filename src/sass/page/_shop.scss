@@ -1,0 +1,395 @@
+/* 5. shop-page-section  */
+.shop-section {
+    background: #f9f9f9;
+    padding-bottom: 90px;
+
+    @media (max-width:991px) {
+        padding-bottom: 60px;
+    }
+
+    @media (max-width:767px) {
+        padding-bottom: 50px;
+    }
+
+    .orico-product-single {
+        text-align: center;
+        background: $white;
+        padding: 30px;
+        transition: all .4s ease-in-out;
+        margin-bottom: 30px;
+        position: relative;
+        border-radius: 25px;
+
+        @media (max-width:1199px) {
+            padding: 15px;
+        }
+
+        @media (max-width:991px) {
+            padding: 25px;
+        }
+
+        &:before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            content: "";
+            background: transparentize($theme-primary-color, .1);
+            z-index: 11;
+            border-radius: 25px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all .3s;
+            transform: scale(0);
+        }
+
+
+        &:hover {
+
+            .orico-product-img img {
+                opacity: 0.6;
+            }
+
+            .orico-product-img .orico-product-link {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            &:before {
+                opacity: 1;
+                visibility: visible;
+                transform: scale(1);
+            }
+
+            .orico-product-text-hide {
+                transform: scale(1);
+            }
+
+            .orico-product-text {
+                opacity: 0;
+            }
+
+        }
+
+
+        .orico-product-item {
+            position: relative;
+            background: $section-bg-color2;
+            padding: 20px 0;
+            border-radius: 25px;
+            max-height: 220px;
+            min-height: 220px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            img {
+                position: relative;
+                transition: all .4s ease-in-out;
+            }
+
+        }
+
+        .orico-product-text,
+        .orico-product-text-hide {
+            margin-top: 20px;
+            transition: all .3s;
+
+            h2 {
+                font-weight: 400;
+                font-size: 22px;
+                line-height: 32px;
+                color: $dark-gray;
+                margin-bottom: 10px;
+                margin-top: 5px;
+
+                a {
+                    color: $dark-gray;
+
+                    &:hover {
+                        color: $theme-primary-color;
+                    }
+                }
+            }
+
+            .product-price {
+                padding-bottom: 7px;
+
+                ul {
+                    display: flex;
+                    justify-content: center;
+
+                    li {
+                        list-style: none;
+                        font-size: 15px;
+                        font-weight: 400;
+                        font-family: $heading-font;
+                        color: $theme-primary-color;
+
+                        &:first-child {
+                            text-decoration: line-through;
+                            margin-right: 10px;
+                            color: $text-color;
+                        }
+
+                        &:last-child {
+                            font-size: 15px;
+                            font-weight: 400;
+                            color: $theme-primary-color;
+                        }
+                    }
+                }
+            }
+
+            .cart-btn {
+                display: inline-block;
+                padding: 10px 25px;
+                background: $white;
+                border-radius: 50px;
+                color: $text-color;
+                width: 160px;
+                margin: 0 auto;
+                margin-top: 20px;
+
+                &:hover {
+                    background: $white;
+                }
+            }
+        }
+
+        .orico-product-text-hide {
+            text-align: center;
+            margin-top: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 112;
+            transform: scale(0);
+            transition: all .3s;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+
+            .orico-product-link {
+                display: flex;
+                align-content: center;
+                justify-content: center;
+                transition: all .4s ease-in-out;
+                margin-bottom: 20px;
+
+                li {
+                    list-style: none;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 10px;
+                    transition: all .4s ease-in-out;
+
+                    a,
+                    button {
+                        display: block;
+                        color: $white;
+                        width: 45px;
+                        height: 45px;
+                        line-height: 45px;
+                        background: transparent;
+                        border-radius: 50px;
+                        border: 1px solid $white;
+
+                        &:hover {
+                            background: $white;
+                            color: $theme-primary-color;
+                        }
+                    }
+
+                    button {
+                        color: #fff;
+                    }
+                }
+            }
+
+            h2 {
+                a {
+                    color: $white;
+
+                    &:hover {
+                        color: $white;
+                    }
+                }
+            }
+
+            .product-price {
+
+                ul {
+
+                    li {
+                        color: $white;
+
+                        &:first-child {
+                            text-decoration: line-through;
+                            margin-right: 10px;
+                            color: $white;
+                        }
+
+                        &:last-child {
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.shop-section-top-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    @media (max-width:767px) {
+        flex-direction: column;
+    }
+
+    button {
+        border: 0;
+        background: transparent;
+    }
+}
+
+.shoping-list .nav-link {
+    background-color: #fff;
+    border: 1px solid rgba(34, 34, 34, 0.1);
+
+    i {
+        color: #070143;
+    }
+}
+
+.nav-link.active {
+    background-color: #F78914;
+
+    i {
+        color: #fff;
+    }
+}
+
+.shoping-list .nav-item {
+    margin-right: 10px;
+}
+
+
+.short-by ul {
+    display: flex;
+    align-items: center;
+
+    li {
+        list-style: none;
+    }
+}
+
+.short-by ul li select {
+    background-color: #fff;
+    border: 1px solid rgba(34, 34, 34, 0.1);
+    padding: 10px;
+    width: 150px;
+    margin-left: 30px;
+
+    &:focus-visible {
+        outline: 0;
+    }
+}
+.shoping-product {
+     @media (max-width:767px) {
+        margin: 20px 0;
+    }
+}
+
+.product-list {
+    .orico-product-single {
+        box-shadow: 0px 5px 15px 0px rgba(68, 68, 68, 0.1);
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        padding: 0;
+
+        @media (max-width:767px) {
+            display: block;
+        }
+
+        &::before {
+            display: none;
+        }
+
+        .orico-product-item {
+            border-radius: 0;
+            padding: 0px;
+            background: transparent;
+
+            .orico-product-img {
+                width: 370px;
+
+                @media (max-width:767px) {
+                    width: 100%;
+                    padding: 20px;
+                }
+            }
+        }
+
+        .orico-product-text-hide {
+
+            .orico-product-link li a,
+            .orico-product-link li button {
+                color: $white;
+                border: 1px solid $theme-primary-color;
+                background: $theme-primary-color;
+            }
+        }
+
+        .orico-product-text {
+            width: calc(100% - 370px);
+            overflow: hidden;
+            display: flex;
+            justify-content: left;
+            flex-direction: column;
+            padding: 30px;
+            text-align: left;
+            margin-top: 0;
+            background: #F0F6EC;
+
+            @media (max-width:767px) {
+                width: 100%;
+                padding: 20px;
+            }
+
+            .product-price ul {
+                display: flex;
+                justify-content: left;
+
+                li {
+                    font-size: 20px;
+
+                    &:last-child {
+                        font-size: 20px;
+                    }
+                }
+            }
+
+            ul {
+                li {
+                    list-style: none;
+                }
+            }
+        }
+
+
+        &:hover {
+            .orico-product-text {
+                opacity: 1;
+            }
+        }
+    }
+}

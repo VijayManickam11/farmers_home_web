@@ -1,0 +1,1630 @@
+/* 3.2 orico-features-section */
+
+.orico-features-section {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, .10);
+    padding: 40px 240px;
+
+    @media(max-width:1700px) {
+        padding: 40px 140px;
+    }
+
+    @media(max-width:991px) {
+        padding: 40px 30px;
+    }
+
+    @media(max-width:1199px) {
+        position: relative;
+        padding: 40px 15px;
+    }
+
+    .row {
+        @media (max-width:767px) {
+            justify-content: center;
+        }
+    }
+
+
+    .features-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width:991px) {
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        @media (max-width:767px) {
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        @media (max-width:575px) {
+            display: block;
+        }
+
+        .features-item-icon {
+            .icon {
+                width: 70px;
+                height: 70px;
+                background: $white;
+                border-radius: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+
+                &:before {
+                    position: absolute;
+                    left: -10%;
+                    top: -10%;
+                    border: 1px dashed $white;
+                    width: 120%;
+                    height: 120%;
+                    content: "";
+                    border-radius: 50%;
+
+                    @media(max-width:1199px) {
+                        border-color: $dark-gray;
+                    }
+                }
+
+                @media(max-width:1199px) {
+                    background: $dark-gray;
+                }
+
+                @media (max-width:991px) {
+                    width: 60px;
+                    height: 60px;
+                }
+
+                @media (max-width:767px) {
+                    margin: 0 auto;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .orico-features-text {
+            padding: 0 40px;
+
+            @media (max-width:1500px) {
+                padding: 0 20px;
+            }
+
+            @media (max-width:991px) {
+                padding-right: 0;
+            }
+
+            h4 {
+                font-weight: 400;
+                font-size: 26px;
+                line-height: 31px;
+                color: $white;
+                margin-bottom: 10px;
+
+                @media(max-width:1199px) {
+                    color: $dark-gray;
+                }
+
+                @media (max-width:1400px) {
+                    font-size: 22px;
+                    margin-bottom: 5px;
+                }
+
+                @media (max-width:991px) {
+                    font-size: 18px;
+                }
+            }
+
+            p {
+                color: $white;
+                margin-bottom: 0;
+
+                @media(max-width:1199px) {
+                    color: $text-color;
+                }
+
+                @media (max-width:1400px) {
+                    font-size: 14px;
+                    line-height: 22px;
+                }
+            }
+        }
+
+    }
+
+    .col {
+        &:last-child {
+            .features-item {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+
+/* 3.3 orico-about-sections */
+
+.orico-about-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+
+    @media(max-width:1200px) {
+        padding-top: 60px;
+    }
+
+    @media(max-width:991px) {
+        padding-top: 40px;
+    }
+
+    .ab-shape {
+        position: absolute;
+        left: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+
+        @media(max-width:1400px) {
+            display: none;
+        }
+    }
+
+    .orico-about-wrap {
+        .orico-about-img {
+            position: relative;
+            z-index: 1;
+            text-align: right;
+            right: -230px;
+
+            .mask {
+                -webkit-mask-image: url(../../images/about/mask.png);
+                mask-image: url(../../images/about/mask.png);
+                -webkit-mask-size: 100%;
+                mask-size: 100%;
+                -webkit-mask-repeat: no-repeat;
+                mask-repeat: no-repeat;
+
+            }
+
+            @media(max-width:1400px) {
+                right: -120px;
+            }
+
+            @media(max-width:991px) {
+                margin: 0;
+                margin-bottom: 40px;
+            }
+
+            @media(max-width:1300px) {
+                width: 120%;
+                right: -80px;
+            }
+
+            @media(max-width:1200px) {
+                width: 120%;
+                right: -50px;
+            }
+
+            @media(max-width:991px) {
+                text-align: center;
+                right: auto;
+                width: 100%;
+                max-width: 550px;
+                margin: 0 auto;
+                margin-bottom: 50px;
+            }
+
+
+            .orico-ab-logo {
+                position: absolute;
+                right: 0;
+                bottom: -5px;
+                width: 148px;
+                height: 148px;
+                text-align: center;
+                line-height: 142px;
+                border-radius: 50%;
+                background: rgba(247, 246, 241, 0.7);
+                z-index: 1;
+
+                &:before {
+                    position: absolute;
+                    left: 10%;
+                    top: 10%;
+                    width: 80%;
+                    height: 80%;
+                    content: "";
+                    background: $white;
+                    z-index: -1;
+                    border-radius: 50%;
+                }
+
+                img {
+                    max-width: 70px;
+                }
+            }
+        }
+    }
+
+    .orico-about-text-wrap {
+        position: relative;
+        background: linear-gradient(90deg, #F7F6F1 0%, #FFFFFF 100%);
+        border-radius: 650px 0px 650px 650px;
+        padding: 100px 0;
+        left: 0px;
+
+        @media(max-width:1600px) {
+            left: 0;
+        }
+
+        @media(max-width:1400px) {
+            border-radius: 450px 0px 450px 450px;
+        }
+
+        @media(max-width:1200px) {
+            border-radius: 350px 0px 350px 350px;
+            padding: 60px 0;
+            padding-left: 80px;
+        }
+
+        @media(max-width:991px) {
+            padding-left: 0px;
+        }
+
+        @media(max-width:767px) {
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        @media(max-width:575px) {
+            padding: 20px;
+        }
+
+
+        .ab-onion-shape {
+            position: absolute;
+            right: 0;
+            top: 0;
+            opacity: 0.08;
+        }
+
+        .orico-about-text {
+            max-width: 569px;
+            margin: 0 auto;
+
+            @media(max-width:1400px) {
+                padding-left: 40px;
+            }
+
+            @media(max-width:991px) {
+                padding-left: 20px;
+            }
+
+            @media(max-width:767px) {
+                margin: 0;
+                padding-left: 0;
+            }
+        }
+
+
+
+        h2 {
+            font-weight: 400;
+            font-size: 60px;
+            line-height: 58px;
+            font-family: $heading-font;
+            margin-bottom: 20px;
+            max-width: 509px;
+
+            @media(max-width:1200px) {
+                font-size: 34px;
+                line-height: 40px;
+            }
+
+            @media(max-width:600px) {
+                font-size: 30px;
+            }
+        }
+
+        span {
+            color: $text-color;
+            font-size: 18px;
+            font-family: $heading-font;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-weight: 400;
+            text-decoration: underline;
+
+            span {
+                color: $theme-primary-color;
+            }
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 30px;
+            display: flex;
+
+            @media(max-width:575px) {
+                display: block;
+            }
+
+            li {
+                padding: 6px 0;
+                position: relative;
+                padding-left: 30px;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 28px;
+                color: $dark-gray;
+
+                i {
+                    position: absolute;
+                    left: 0;
+                    top: 5px;
+                }
+            }
+        }
+    }
+
+}
+
+
+/* 3.4 orico-fun-fact-section */
+
+.orico-fun-fact-section {
+    text-align: center;
+    background: $theme-primary-color;
+    padding: 40px 0;
+    position: relative;
+
+    @include media-query(767px) {
+        padding-bottom: 0;
+    }
+
+    .f-shape-1 {
+        position: absolute;
+        left: 0;
+        top: -40px;
+        width: 100%;
+
+        @include media-query(1200px) {
+            top: -30px;
+        }
+
+        @include media-query(991px) {
+            top: -20px;
+        }
+
+        @include media-query(575px) {
+            top: -10px;
+        }
+    }
+
+    .f-shape-2 {
+        position: absolute;
+        left: 0;
+        bottom: -40px;
+        width: 100%;
+
+        @include media-query(1200px) {
+            bottom: -30px;
+        }
+
+        @include media-query(991px) {
+            bottom: -20px;
+        }
+
+        @include media-query(575px) {
+            bottom: -10px;
+        }
+    }
+
+    @include media-query(767px) {
+        padding-bottom: 30px;
+    }
+
+    .orico-fun-fact-grids .grid {
+        width: 25%;
+        float: left;
+
+        @include media-query(767px) {
+            width: 50%;
+            margin-bottom: 30px;
+        }
+    }
+
+    .grid {
+
+        h3 {
+            font-weight: 400;
+            font-size: 70px;
+            line-height: 58px;
+            font-size: calc-rem-value(70);
+            color: $white;
+            margin: 0 0 0.1em;
+            font-family: $heading-font;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            span {
+                font-family: $heading-font;
+            }
+
+            @include media-query(1200px) {
+                font-size: 50px;
+                ont-size: calc-rem-value(50);
+            }
+
+            @include media-query(991px) {
+                font-size: 40px;
+                font-size: calc-rem-value(40);
+                line-height: 48px;
+            }
+
+            @include media-query(767px) {
+                font-size: 30px;
+                font-size: calc-rem-value(30);
+                line-height: 38px;
+            }
+        }
+
+        .info {
+            position: relative;
+            z-index: 1;
+
+            .icon {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                z-index: -1;
+
+                img {
+                    @media(max-width:767px) {
+                        max-width: 60%;
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
+    .grid h3+p {
+        font-size: 16px;
+        line-height: 28px;
+        font-size: calc-rem-value(16);
+        margin: 0;
+        color: $white;
+
+        @include media-query(1200px) {
+            font-size: 18px;
+            font-size: calc-rem-value(15);
+        }
+
+        @include media-query(991px) {
+            font-size: 14px;
+            font-size: calc-rem-value(14);
+        }
+    }
+}
+
+
+/* 3.5 orico-service-section*/
+
+.orico-service-section {
+    padding-bottom: 90px;
+
+    @media (max-width:991px) {
+        padding-bottom: 60px;
+    }
+
+    @media (max-width:767px) {
+        padding-bottom: 50px;
+    }
+
+    .service-item {
+        padding: 30px;
+        background: #fff;
+        border-radius: 350px 350px 350px 350px;
+        box-shadow: 4px 8px 20px #eaeced;
+        text-align: center;
+        margin-bottom: 30px;
+
+        .service-item-img {
+            overflow: hidden;
+            border-radius: 50%;
+
+            img {
+                width: 100%;
+                border-radius: 50%;
+                transform: scale(1);
+                transition: all .3s;
+            }
+        }
+
+        &:hover {
+            .service-item-img {
+                img {
+                    transform: scale(1.2);
+                }
+            }
+        }
+
+        .orico-service-text {
+            .icon {
+                width: 120px;
+                height: 120px;
+                line-height: 120px;
+                background: $white;
+                box-shadow: 0px 0px 35px rgba(35, 35, 35, 0.1);
+                border-radius: 50%;
+                margin: 0 auto;
+                margin-top: -60px;
+                position: relative;
+                margin-bottom: 20px;
+
+                img {
+                    width: unset;
+                    max-width: 55px;
+                }
+            }
+
+            h4 {
+                font-weight: 400;
+                font-size: 22px;
+                line-height: 34px;
+                text-align: center;
+                margin-bottom: 20px;
+
+                @media(max-width:767px) {
+                    font-size: 20px;
+                }
+            }
+
+            a {
+                display: block;
+                width: 60px;
+                height: 60px;
+                line-height: 60px;
+                border: 1px solid $theme-primary-color;
+                margin: 0 auto;
+                color: $theme-primary-color;
+                margin-top: 10px;
+                border-radius: 50%;
+
+                &:hover {
+                    background: $theme-primary-color;
+                    color: $white;
+                }
+            }
+        }
+
+    }
+}
+
+/* 3.6 orico-offer-section  */
+.orico-product-offer-section {
+    background: url(../../images/offer/bg.jpg) no-repeat center top / cover;
+    position: relative;
+    z-index: 1;
+
+    .p-shape-1 {
+        position: absolute;
+        left: 40px;
+        bottom: 40px;
+        max-width: 170px;
+        z-index: -1;
+
+        @media(max-width:991px) {
+            left: 20px;
+            bottom: 20px;
+        }
+
+        img {
+            @media(max-width:1200px) {
+                max-width: 60%;
+            }
+
+            @media(max-width:991px) {
+                max-width: 50%;
+            }
+        }
+    }
+
+    .p-shape-2 {
+        position: absolute;
+        right: 40px;
+        top: 40px;
+        max-width: 170px;
+        text-align: right;
+        z-index: -1;
+
+        @media(max-width:991px) {
+            right: 0px;
+            top: 20px;
+        }
+
+        img {
+            @media(max-width:1200px) {
+                max-width: 60%;
+            }
+
+            @media(max-width:991px) {
+                max-width: 50%;
+            }
+        }
+    }
+
+    &:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        content: "";
+        background: #111F0B;
+        opacity: .5;
+        z-index: -1;
+    }
+
+    @media(max-width:767px) {
+        padding: 50px 0;
+    }
+
+
+    .orico-product-offer-text {
+        margin: 0;
+        text-align: center;
+
+        h2 {
+            font-weight: 400;
+            font-size: 100px;
+            line-height: 58px;
+            text-align: center;
+            text-decoration-line: underline;
+            text-transform: capitalize;
+            color: $theme-primary-color;
+            margin-bottom: 50px;
+
+            span {
+                color: $white;
+                text-decoration-line: underline;
+            }
+
+            @media (max-width:1400px) {
+                font-size: 80px;
+            }
+
+            @media (max-width:991px) {
+                font-size: 70px;
+                line-height: 85px;
+                margin-bottom: 10px;
+            }
+
+            @media (max-width:575px) {
+                font-size: 50px;
+                line-height: 65px;
+                margin-bottom: 10px;
+            }
+        }
+
+        h3 {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 70px;
+            line-height: 58px;
+            color: $white;
+            margin-bottom: 30px;
+
+            @media (max-width:1400px) {
+                font-size: 40px;
+            }
+
+            @media (max-width:767px) {
+                font-size: 30px;
+                line-height: 55px;
+                margin-bottom: 15px;
+            }
+
+            @media (max-width:575px) {
+                font-size: 20px;
+                line-height: 45px;
+            }
+        }
+
+        p {
+            font-family: $heading-font;
+            font-size: 20px;
+            font-weight: 400;
+            color: $text-light-color;
+            margin-top: 21px;
+            margin-bottom: 50px;
+
+            @media (max-width:1400px) {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-top: 10px;
+            }
+
+            @media (max-width:575px) {
+                font-size: 18px;
+                line-height: 25px;
+            }
+
+            @media (max-width:425px) {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+
+/* 3.7 orico-product-section */
+.orico-product-section {
+    padding-bottom: 90px;
+    background: $section-bg-color;
+    position: relative;
+    z-index: 11;
+
+    @media (max-width:991px) {
+        padding-bottom: 60px;
+    }
+
+    @media (max-width:991px) {
+        padding-bottom: 50px;
+    }
+
+
+    .p-shape-1 {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+
+    .p-shape-2 {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: -1;
+    }
+
+    .product-wrap {
+        .gallery-filters {
+            @media (max-width:767px) {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .product-filter-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: $white;
+                max-width: 640px;
+                margin: 0 auto;
+                border-radius: 130px;
+                text-transform: uppercase;
+
+                @media (max-width:767px) {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+
+                @media (max-width:575px) {
+                    padding: 5px;
+                }
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    list-style: none;
+
+                    &:last-child {
+                        margin-right: 0;
+
+                        .product-btn {
+                            &:before {
+                                display: none;
+                            }
+                        }
+
+                    }
+
+                    @media (max-width:1199px) {
+                        margin-right: 5px;
+
+                        &:last-child {
+                            margin-right: 0;
+                        }
+                    }
+
+
+                }
+
+                .product-btn {
+                    padding: 20px 30px;
+                    position: relative;
+                    color: #8B8B8B;
+                    font-family: $heading-font;
+                    font-size: 18px;
+                    border: 0;
+                    background: transparent;
+                    text-transform: uppercase;
+
+                    @media (max-width:767px) {
+                        padding: 10px 20px;
+                        font-size: 14px;
+                    }
+
+                    @media (max-width:575px) {
+                        padding: 5px 5px;
+                    }
+
+                    @media (max-width:350px) {
+                        padding: 2px;
+                    }
+
+                    &:before {
+                        position: absolute;
+                        left: 100%;
+                        top: 50%;
+                        content: "";
+                        width: 8px;
+                        height: 3px;
+                        background: #8B8B8B;
+                        transform: translateY(-50%);
+
+                        @media (max-width:575px) {
+                            display: none;
+                        }
+                    }
+                }
+
+                .product-btn.current {
+                    color: $theme-primary-color;
+                }
+            }
+        }
+
+        .gallery-container {
+            margin-top: 80px;
+
+            @media(max-width:991px) {
+                margin-top: 50px;
+            }
+
+            .orico-product-single {
+                text-align: center;
+                background: $white;
+                padding: 30px;
+                transition: all .4s ease-in-out;
+                margin-bottom: 30px;
+                position: relative;
+                border-radius: 25px;
+
+                @media (max-width:1199px) {
+                    padding: 15px;
+                }
+
+                @media (max-width:991px) {
+                    padding: 25px;
+                }
+
+                &:before {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    content: "";
+                    background: transparentize($theme-primary-color, .1);
+                    z-index: 11;
+                    border-radius: 25px;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all .3s;
+                    transform: scale(0);
+                }
+
+
+                &:hover {
+
+                    .orico-product-img img {
+                        opacity: 0.6;
+                    }
+
+                    .orico-product-img .orico-product-link {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+
+                    &:before {
+                        opacity: 1;
+                        visibility: visible;
+                        transform: scale(1);
+                    }
+
+                    .orico-product-text-hide {
+                        transform: scale(1);
+                    }
+
+                    .orico-product-text {
+                        opacity: 0;
+                    }
+
+                }
+
+
+                .orico-product-item {
+                    position: relative;
+                    background: $section-bg-color2;
+                    padding: 20px 0;
+                    border-radius: 25px;
+                    max-height: 220px;
+                    min-height: 220px;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+
+                    img {
+                        position: relative;
+                        transition: all .4s ease-in-out;
+                    }
+
+                }
+
+                .orico-product-text,
+                .orico-product-text-hide {
+                    margin-top: 20px;
+                    transition: all .3s;
+
+                    h2 {
+                        font-weight: 400;
+                        font-size: 22px;
+                        line-height: 32px;
+                        color: $dark-gray;
+                        margin-bottom: 10px;
+                        margin-top: 5px;
+
+                        a {
+                            color: $dark-gray;
+
+                            &:hover {
+                                color: $theme-primary-color;
+                            }
+                        }
+                    }
+
+                    .product-price {
+                        padding-bottom: 7px;
+
+                        ul {
+                            display: flex;
+                            justify-content: center;
+
+                            li {
+                                list-style: none;
+                                font-size: 15px;
+                                font-weight: 400;
+                                font-family: $heading-font;
+                                color: $theme-primary-color;
+
+                                &:first-child {
+                                    text-decoration: line-through;
+                                    margin-right: 10px;
+                                    color: $text-color;
+                                }
+
+                                &:last-child {
+                                    font-size: 15px;
+                                    font-weight: 400;
+                                    color: $theme-primary-color;
+                                }
+                            }
+                        }
+                    }
+
+                    .cart-btn {
+                        display: inline-block;
+                        padding: 10px 25px;
+                        background: $white;
+                        border-radius: 50px;
+                        color: $text-color;
+                        width: 160px;
+                        margin: 0 auto;
+                        margin-top: 20px;
+                        border: 0;
+
+                        &:hover {
+                            background: $white;
+                        }
+                    }
+                }
+
+                .orico-product-text-hide {
+                    text-align: center;
+                    margin-top: 0;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 112;
+                    transform: scale(0);
+                    transition: all .3s;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    width: 100%;
+                    height: 100%;
+
+                    .orico-product-link {
+                        display: flex;
+                        align-content: center;
+                        justify-content: center;
+                        transition: all .4s ease-in-out;
+                        margin-bottom: 20px;
+
+                        li {
+                            list-style: none;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin-left: 10px;
+                            transition: all .4s ease-in-out;
+
+                            a,
+                            button {
+                                display: block;
+                                color: $white;
+                                width: 45px;
+                                height: 45px;
+                                line-height: 45px;
+                                background: transparent;
+                                border-radius: 50px;
+                                border: 1px solid $white;
+
+                                &:hover {
+                                    background: $white;
+                                    color: $theme-primary-color;
+                                }
+                            }
+
+                            button {
+                                color: #fff;
+                            }
+                        }
+                    }
+
+                    h2 {
+                        a {
+                            color: $white;
+
+                            &:hover {
+                                color: $white;
+                            }
+                        }
+                    }
+
+                    .product-price {
+
+                        ul {
+
+                            li {
+                                color: $white;
+
+                                &:first-child {
+                                    text-decoration: line-through;
+                                    margin-right: 10px;
+                                    color: $white;
+                                }
+
+                                &:last-child {
+                                    color: $white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .more-btn {
+            text-align: center;
+            margin-top: 30px;
+
+            @media(max-width:991px) {
+                margin-top: 10px;
+            }
+        }
+    }
+}
+
+/* 3.8 orico-partners-section   */
+
+.orico-partners-section {
+    background: url(../../images/partner/bg.jpg) no-repeat center top / cover;
+    z-index: 1;
+    position: relative;
+    padding: 60px 0 20px;
+
+   
+
+    &::before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        content: "";
+        background: $theme-primary-color-s2;
+        opacity: 0.9;
+    }
+
+
+    .partner-wrap {
+      
+        .partner-item {
+            padding-bottom: 30px;
+            text-align: center;
+
+          
+
+            img {
+                width: unset;
+                text-align: center;
+                margin: 0 auto;
+
+                @media (max-width:425px) {
+                    display: unset;
+                }
+
+            }
+        }
+
+    }
+
+
+}
+
+
+/* 3.9 orico-testimonial-area   */
+
+.orico-testimonial-area {
+    background: url(../../images/testimonial/bg.jpg) no-repeat center top / cover;
+    position: relative;
+    z-index: 1;
+
+    .t-shape {
+        position: absolute;
+        left: 6%;
+        top: 18%;
+
+        @media(max-width:991px) {
+            display: none;
+        }
+
+        img {
+            @media(max-width:1400px) {
+                max-width: 60%;
+            }
+        }
+
+    }
+
+    .orico-testimonial-wrap {
+        .orico-testimonial-item {
+            display: flex !important;
+            background: $theme-primary-color;
+            border-radius: 20px;
+            align-items: center;
+
+            @media(max-width:991px) {
+                display: block !important;
+            }
+
+            .orico-testimonial-img {
+                flex-basis: 28%;
+
+                img {
+                    border-top-left-radius: 20px;
+                    border-bottom-left-radius: 20px;
+
+                    @media(max-width:991px) {
+                        border-bottom-left-radius: 0px;
+                        border-top-right-radius: 20px;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+
+            .orico-testimonial-content {
+                padding: 60px;
+                flex-basis: 72%;
+                position: relative;
+                z-index: 1;
+
+                &:before {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    content: "\f10a";
+                    font-family: "Flaticon";
+                    z-index: -1;
+                    font-size: 260px;
+                    color: $white;
+                    transform: rotate(180deg);
+                    transform: translate(-50%, -50%);
+                    opacity: .1;
+
+                    @media(max-width:767px) {
+                        top: 40%;
+                        font-size: 200px;
+                    }
+                }
+
+
+                @media(max-width:1400px) {
+                    padding: 20px;
+                }
+
+                @media(max-width:1200px) {
+                    padding: 20px;
+                }
+
+                @media(max-width:991px) {
+                    padding-top: 30px;
+                    padding-bottom: 30px;
+                }
+
+                @media(max-width:767px) {
+                    padding: 20px 10px;
+                }
+
+                h2 {
+                    font-weight: 400;
+                    font-size: 36px;
+                    line-height: 32px;
+                    color: $white;
+
+                    @media(max-width:1200px) {
+                        font-size: 30px;
+                        margin-bottom: 10px;
+                    }
+                }
+
+                span {
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 32px;
+                    color: $white;
+                }
+
+                p {
+                    font-style: normal;
+                    font-family: $heading-font;
+                    font-weight: 400;
+                    font-size: 25px;
+                    line-height: 35px;
+                    margin-bottom: 25px;
+                    position: relative;
+                    z-index: 1;
+                    color: $white;
+
+                    @media(max-width:1400px) {
+                        font-size: 18px;
+                        line-height: 35px;
+                    }
+
+                    @media(max-width:1200px) {
+                        margin-bottom: 15px;
+                        line-height: 30px;
+                    }
+
+
+                    @media(max-width:991px) {
+                        font-size: 18px;
+                        line-height: 34px;
+                    }
+                }
+            }
+
+            @media(max-width:767px) {
+                text-align: center;
+            }
+        }
+
+        .testimonial-slider {
+
+            .owl-stage {
+                margin: 15px;
+            }
+
+            .owl-stage-outer {
+                margin: -15px;
+            }
+
+            @media(max-width:991px) {
+                padding-bottom: 0px;
+            }
+
+            button {
+                position: absolute;
+                left: -30px;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 50px;
+                width: 50px;
+                line-height: 46px;
+                text-align: center;
+                background: $white;
+                transition: all .3s;
+                border: 1px solid #ebebeb;
+                font-size: 20px;
+                border-radius: 50%;
+                opacity: 0;
+                visibility: hidden;
+
+                &:hover {
+                    background: $theme-primary-color;
+                    color: $white;
+                }
+
+                @media(max-width:991px) {
+                    display: none;
+                }
+            }
+
+            .owl-next {
+                right: -30px;
+                left: auto;
+                transform: translateY(-50%);
+
+                @media(max-width:991px) {
+                    display: none;
+                }
+            }
+
+            &:hover {
+                button {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+
+/* 3.10 orico-blog-area   */
+
+.orico-blog-area {
+    .orico-blog-wrap {
+        .orico-blog-item {
+            background: $section-bg-color;
+            border-radius: 25px;
+
+            @include media-query(991px) {
+                margin-bottom: 30px;
+            }
+
+            .orico-blog-img {
+                padding: 30px;
+                border-radius: 25px;
+
+                img {
+                    width: 100%;
+                    border-radius: 25px;
+                }
+            }
+
+            .orico-blog-content {
+                padding: 30px;
+                padding-top: 0;
+
+                ul {
+                    display: flex;
+                    margin-bottom: 20px;
+
+                    li {
+                        color: $theme-primary-color;
+                        list-style: none;
+                        text-transform: uppercase;
+                    }
+                }
+
+                h3 {
+                    margin-bottom: 30px;
+                    font-size: 25px;
+                    line-height: 33px;
+
+                    @media(max-width:1200px) {
+                        font-size: 18px;
+                    }
+
+                    a {
+                        color: $dark-gray;
+
+                        &:hover {
+                            color: $theme-primary-color;
+                        }
+                    }
+                }
+
+                .theme-btn-s2 {
+                    background: none;
+                    color: $dark-gray;
+                    border: 1px solid $theme-primary-color;
+                    padding: 8px 25px 10px;
+
+                    &:hover {
+                        color: $white;
+                    }
+
+                    @media(max-width:1200px) {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+/* 3.11 wpo-team-section */
+
+.wpo-team-section {
+    padding-bottom: 90px;
+
+    @media(max-width:991px) {
+        padding-bottom: 60px;
+    }
+
+    .wpo-team-wrap {
+        .wpo-team-item {
+            text-align: center;
+            position: relative;
+            transition: all .3s;
+            z-index: 1;
+
+            .bg-shape {
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: -1;
+            }
+
+            .wpo-team-img {
+                overflow: hidden;
+                position: relative;
+                -webkit-mask-image: url(../../images/team/mask.png);
+                mask-image: url(../../images/team/mask.png);
+                -webkit-mask-size: 98%;
+                mask-size: 98%;
+                -webkit-mask-repeat: no-repeat;
+                mask-repeat: no-repeat;
+
+                img {
+                    width: 100%;
+                    transform: scale(1);
+                    transition: all .3s;
+                }
+            }
+
+            .wpo-team-text {
+                position: absolute;
+                left: 0;
+                top: -10%;
+                width: 100%;
+                height: 120%;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                background: transparentize($theme-primary-color-s2, .2);
+                border-radius: 50%;
+                transition: all .3s;
+                transform: translateY(100%);
+                padding-top: 15px;
+
+                span {
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 32px;
+                    color: $white;
+                }
+
+                h2 {
+                    font-weight: 400;
+                    font-size: 30px;
+                    line-height: 32px;
+                    color: $white;
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+
+                    @media(max-width:1200px) {
+                        font-size: 25px;
+                    }
+                }
+
+                .social-widget {
+                    ul {
+                        display: flex;
+                        list-style: none;
+                        justify-content: center;
+                        margin-top: 15px;
+
+                        li {
+                            &+li {
+                                margin-left: 10px;
+                            }
+
+                            a {
+                                display: inline-block;
+                                width: 40px;
+                                height: 40px;
+                                line-height: 40px;
+                                border: 1px solid $white;
+                                color: $white;
+                                border-radius: 50%;
+                                position: relative;
+                                overflow: hidden;
+
+                                &::after {
+                                    position: absolute;
+                                    left: 0;
+                                    top: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: transparentize($white, .5);
+                                    transform: translateX(-100%);
+                                    content: "";
+                                    transition: all .5s;
+                                }
+
+                                &:hover {
+                                    &::after {
+                                        transform: translateX(100%);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:hover {
+                .wpo-team-img {
+                    img {
+                        transform: scale(1.2);
+                    }
+                }
+
+                .wpo-team-text {
+                    transform: translateY(0);
+                }
+
+            }
+        }
+    }
+}

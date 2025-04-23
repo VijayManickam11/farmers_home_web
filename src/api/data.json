@@ -1,0 +1,99 @@
+[
+  {
+    "id": 1,
+    "proImg": "/product/1.png",
+    "singImg": "/product/product-single/1.jpg",
+    "title": "Fresh key Lime",
+    "slug": "Fresh-key-Lime",
+    "price": "30.00",
+    "delPrice": "20.00",
+    "brand":"Organic Food",
+    "size":"Xl",
+    "category":"fruit"
+  },
+  {
+    "id": 2,
+    "proImg": "/product/2.png",
+    "singImg": "/product/product-single/2.jpg",
+    "title": "Red Radish",
+    "slug": "Red-Radish",
+    "price": "22.00",
+    "delPrice": "20.00",
+    "brand":"Organic Food",
+    "size":"XXl",
+    "category":"fruit"
+  },
+  {
+    "id": 3,
+    "proImg": "/product/3.png",
+    "singImg": "/product/product-single/3.jpg",
+    "title": "Cauliflower",
+    "slug": "Cauliflower",
+    "price": "25.00",
+    "delPrice": "15.00",
+    "brand":"Organic Food",
+    "size":"L",
+    "category":"milk"
+  },
+  {
+    "id": 4,
+    "proImg": "/product/4.png",
+    "singImg": "/product/product-single/4.jpg",
+    "title": "Yellow Corn",
+    "slug": "Yellow-Corn",
+    "price": "16.00",
+    "delPrice": "10.00",
+    "brand":"Organic Food",
+    "size":"M",
+    "category":"vegetables"
+  },
+  {
+    "id": 5,
+    "proImg": "/product/5.png",
+    "singImg": "/product/product-single/5.jpg",
+    "title": "Red Onion",
+    "slug": "Red-Onion",
+    "price": "15.00",
+    "delPrice": "10.00",
+    "brand":"Organic Food",
+    "size":"XXl",
+    "category":"milk"
+  },
+  {
+    "id": 6,
+    "proImg": "/product/6.png",
+    "singImg": "/product/product-single/6.jpg",
+    "title": "Lens Broccoli",
+    "slug": "Lens-Broccoli",
+    "price": "18.00",
+    "delPrice": "12.00",
+    "brand":"Organic Food",
+    "size":"Xl",
+    "category":"milk"
+  },
+  {
+    "id": 7,
+    "proImg": "/product/7.png",
+    "singImg": "/product/product-single/7.jpg",
+    "title": "Orange Paprika",
+    "slug": "Orange-Paprika",
+    "price": "12.00",
+    "delPrice": "06.00",
+    "brand":"Organic Food",
+    "size":"Xl",
+    "category":"vegetables"
+  },
+  {
+    "id": 8,
+    "proImg": "/product/8.png",
+    "singImg": "/product/product-single/8.jpg",
+    "title": "Fresh Mushrooms",
+    "slug": "Fresh-Mushrooms",
+    "price": "13.00",
+    "delPrice": "06.00",
+    "brand":"Organic Food",
+    "size":"Xl",
+    "category":"fruit"
+  }
+
+]
