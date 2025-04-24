@@ -1,9 +1,10 @@
 
 /* Single image */
-import img1 from '../images/service/img-1.jpg'
-import img2 from '../images/service/img-2.jpg'
-import img3 from '../images/service/img-3.jpg'
-import img4 from '../images/service/img-4.jpg'
+// 600*600
+import img1 from '../images/service/sr-01.jpg' 
+import img2 from '../images/service/cows.jpg'
+import img3 from '../images/service/mirrors.jpg'
+import img4 from '../images/service/vegetable.jpg'
 
 
 

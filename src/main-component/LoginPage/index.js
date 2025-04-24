@@ -7,8 +7,10 @@ import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Link, useNavigate } from "react-router-dom";
+import loginImage from "../../images/Login/child.jpg";
 
 import './style.scss';
+import { Box } from '@mui/material';
 
 
 
@@ -52,7 +54,7 @@ const LoginPage = (props) => {
 
             if (email.match(userRegex)) {
                 toast.success('Successfully Login on istiqbal !');
-                push('/home');
+                push('/dashboard');
             }
         } else {
             validator.showMessages();
@@ -60,8 +62,14 @@ const LoginPage = (props) => {
         }
     };
     return (
-        <Grid className="loginWrapper">
-            <Grid className="loginForm">
+        <Grid container>
+            <Grid xs={6}>
+            <Box component="img" sx={{height:"100vh"}}  src={loginImage} alt='loginImage'/>
+            </Grid>
+        <Grid xs={6}>
+
+       
+            <Box className="loginForm" sx={{display:"flex",flexDirection:"column",padding:17}}>
                 <h2>Sign In</h2>
                 <p>Sign in to your account</p>
                 <form onSubmit={submitForm}>
@@ -102,22 +110,26 @@ const LoginPage = (props) => {
                             {validator.message('password', value.password, 'required')}
                         </Grid>
                         <Grid item xs={12}>
-                            <Grid className="formAction">
+                            <Grid className="formAction" sx={{display:"flex",justifyContent:"space-between"}}>
+                                <Box sx={{display:"flex",flexDirection:"column",justifyContent:"center"}}>
                                 <FormControlLabel
                                     control={<Checkbox checked={value.remember} onChange={rememberHandler} />}
                                     label="Remember Me"
                                 />
-                                <Link to="/forgot">Forgot Password?</Link>
+                                </Box>
+                                <Box sx={{display:"flex",flexDirection:"column",justifyContent:"center"}}>
+                                <Link to="/forgot" style={{float:"right"}}>Forgot Password?</Link>
+                                </Box>
                             </Grid>
-                            <Grid className="formFooter">
+                            <Grid className="formFooter" mt={2}>
                                 <Button fullWidth className="cBtnTheme" type="submit">Login</Button>
                             </Grid>
-                            <Grid className="loginWithSocial">
-                                <Button className="facebook"><i className="fa fa-facebook"></i></Button>
-                                <Button className="twitter"><i className="fa fa-twitter"></i></Button>
-                                <Button className="linkedin"><i className="fa fa-linkedin"></i></Button>
+                            <Grid className="loginWithSocial" sx={{textAlign:"center"}} mt={3} mb={2}>
+                                <Button className="facebook" sx={{backgroundColor:"#3b5998"}}><i className="fa fa-facebook" style={{color:"white"}}></i></Button>
+                                <Button className="twitter" sx={{backgroundColor:"#55acee",ml:2}}><i className="fa fa-twitter" style={{color:"white"}}></i></Button>
+                                <Button className="linkedin" sx={{backgroundColor:"#0077B5",ml:2}}><i className="fa fa-linkedin" style={{color:"white"}}></i></Button>
                             </Grid>
-                            <p className="noteHelp">Don't have an account? <Link to="/register">Create free account</Link>
+                            <p className="noteHelp" style={{textAlign:"center"}}>Don't have an account? <Link to="/register">Create free account</Link>
                             </p>
                         </Grid>
                     </Grid>
@@ -125,7 +137,10 @@ const LoginPage = (props) => {
                 <div className="shape-img">
                     <i className="fi flaticon-honeycomb"></i>
                 </div>
-            </Grid>
+            </Box>
+           
+            
+        </Grid>
         </Grid>
     )
 };

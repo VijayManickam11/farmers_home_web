@@ -4,8 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Link } from 'react-router-dom'
-import hero1 from '../../images/slider/slide-1.jpg'
-import hero2 from '../../images/slider/slide-4.jpg'
+import hero1 from '../../images/slider/slide-01.jpg'
+import hero2 from '../../images/slider/slide-03.jpg'
 import Shape from '../../images/slider/shape-1.png'
 import Shape2 from '../../images/slider/shape-2.png'
 import Shape3 from '../../images/slider/shape-3.png'

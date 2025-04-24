@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 // image
-import Ab from '../../images/about/ab.jpg'
+import Ab from '../../images/about/about-01.jpg'
 import Abd1 from '../../images/about/1.png'
 import Abd2 from '../../images/about/4.png'
 import Abd3 from '../../images/about/5.png'

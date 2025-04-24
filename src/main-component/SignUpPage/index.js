@@ -5,9 +5,14 @@ import { toast } from "react-toastify";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
+import loginImage from "../../images/Login/child.jpg";
 
 
-import './style.scss';
+
+      
+
+// import './style.scss';
+import { Box } from '@mui/material';   
 
 const SignUpPage = (props) => {
 
@@ -16,6 +21,8 @@ const SignUpPage = (props) => {
     const [value, setValue] = useState({
         email: '',
         full_name: '',
+        mobileNumber:"",
+        address:"",
         password: '',
         confirm_password: '',
     });
@@ -36,6 +43,8 @@ const SignUpPage = (props) => {
             setValue({
                 email: '',
                 full_name: '',
+                mobileNumber:"",
+                address:"",
                 password: '',
                 confirm_password: '',
             });
@@ -48,14 +57,21 @@ const SignUpPage = (props) => {
         }
     };
     return (
-        <Grid className="loginWrapper">
+        <Grid container>
 
-            <Grid className="loginForm">
+           <Grid xs={6}>
+           <Box component="img" sx={{height:"100vh"}}  src={loginImage} alt='loginImage'/>
+
+
+            </Grid>
+
+            <Grid xs={6} >
+               <Box sx={{padding:10,display:"flex",flexDirection:"column",justifyContent:"center"}}>
                 <h2>Signup</h2>
                 <p>Signup your account</p>
                 <form onSubmit={submitForm}>
                     <Grid container spacing={3}>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <TextField
                                 className="inputOutline"
                                 fullWidth
@@ -72,7 +88,7 @@ const SignUpPage = (props) => {
                             />
                             {validator.message('full name', value.full_name, 'required|alpha')}
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <TextField
                                 className="inputOutline"
                                 fullWidth
@@ -89,7 +105,41 @@ const SignUpPage = (props) => {
                             />
                             {validator.message('email', value.email, 'required|email')}
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
+                            <TextField
+                                className="inputOutline"
+                                fullWidth
+                                placeholder="Mobile Number"
+                                value={value.mobileNumber}
+                                variant="outlined"
+                                name="mobileNumber"
+                                label="Mobile Number"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                onBlur={(e) => changeHandler(e)}
+                                onChange={(e) => changeHandler(e)}
+                            />
+                            {validator.message('mobileNumber', value.mobileNumber, 'required|email')}
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                className="inputOutline"
+                                fullWidth
+                                placeholder="Address"
+                                value={value.address}
+                                variant="outlined"
+                                name="address"
+                                label="Address"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                onBlur={(e) => changeHandler(e)}
+                                onChange={(e) => changeHandler(e)}
+                            />
+                            {validator.message('address', value.address, 'required|email')}
+                        </Grid>
+                        <Grid item xs={6}>
                             <TextField
                                 className="inputOutline"
                                 fullWidth
@@ -106,7 +156,7 @@ const SignUpPage = (props) => {
                             />
                             {validator.message('password', value.password, 'required')}
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <TextField
                                 className="inputOutline"
                                 fullWidth
@@ -123,16 +173,17 @@ const SignUpPage = (props) => {
                             />
                             {validator.message('confirm password', value.confirm_password, `in:${value.password}`)}
                         </Grid>
+                        
                         <Grid item xs={12}>
-                            <Grid className="formFooter">
-                                <Button fullWidth className="cBtn cBtnLarge cBtnTheme" type="submit">Sign Up</Button>
+                            <Grid className="formFooter" sx={{display:"flex",justifyContent:"center"}}>
+                                <Button  className="cBtn cBtnLarge cBtnTheme" type="submit" sx={{width:"53%"}}>Sign Up</Button>
                             </Grid>
-                            <Grid className="loginWithSocial">
-                                <Button className="facebook"><i className="fa fa-facebook"></i></Button>
-                                <Button className="twitter"><i className="fa fa-twitter"></i></Button>
-                                <Button className="linkedin"><i className="fa fa-linkedin"></i></Button>
+                            <Grid className="loginWithSocial" sx={{textAlign:"center"}} mt={3} mb={2}>
+                                <Button className="facebook" sx={{backgroundColor:"#3b5998"}}><i className="fa fa-facebook" style={{color:"white"}}></i></Button>
+                                <Button className="twitter" sx={{backgroundColor:"#55acee",ml:2}}><i className="fa fa-twitter" style={{color:"white"}}></i></Button>
+                                <Button className="linkedin" sx={{backgroundColor:"#0077B5",ml:2}}><i className="fa fa-linkedin" style={{color:"white"}}></i></Button>
                             </Grid>
-                            <p className="noteHelp">Already have an account? <Link to="/login">Return to Sign In</Link>
+                            <p className="noteHelp" style={{textAlign:"center"}}>Already have an account? <Link to="/">Return to Sign In</Link>
                             </p>
                         </Grid>
                     </Grid>
@@ -140,6 +191,7 @@ const SignUpPage = (props) => {
                 <div className="shape-img">
                     <i className="fi flaticon-honeycomb"></i>
                 </div>
+                </Box>
             </Grid>
         </Grid>
     )

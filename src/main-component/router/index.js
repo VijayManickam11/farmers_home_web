@@ -32,7 +32,8 @@ const AllRoute = () => {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<LoginPage />} />
+          <Route path="/dashboard" element={<Homepage />} />
           <Route path="home" element={<Homepage />} />
           <Route path="home-2" element={<HomePage2 />} />
           <Route path="home-3" element={<HomePage3 />} />
@@ -52,8 +53,7 @@ const AllRoute = () => {
           <Route path='blog-single/:slug' element={<BlogDetails />} />
           <Route path='blog-single-left-sidebar/:slug' element={<BlogDetailsLeftSiide />} />
           <Route path='blog-single-fullwidth/:slug' element={<BlogDetailsFull />} />
-          <Route path='contact' element={<ContactPage />} />
-          <Route path="login" element={<LoginPage />} />
+          <Route path='contact' element={<ContactPage />} />         
           <Route path="forgot" element={<ForgotPassword />} />
           <Route path="register" element={<Register />} />
           <Route path='404' element={<ErrorPage />} />  
