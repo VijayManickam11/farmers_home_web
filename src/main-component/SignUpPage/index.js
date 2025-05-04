@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import loginImage from "../../images/Login/child.jpg";
+import logo from "../../images/Logo/FarmersHomeLogo.svg"
 
 
 
@@ -66,7 +67,12 @@ const SignUpPage = (props) => {
             </Grid>
 
             <Grid xs={6} >
-               <Box sx={{padding:10,display:"flex",flexDirection:"column",justifyContent:"center"}}>
+                <Box sx={{display:"flex",justifyContent:"center",flexDirection:"column"}}>
+                           
+                        <Box component="img" src={logo} sx={{height:"15vh"}} mt={2} alt='loginImage'/>
+                
+                        </Box>
+               <Box sx={{padding:3,display:"flex",flexDirection:"column",justifyContent:"center"}}>
                 <h2>Signup</h2>
                 <p>Signup your account</p>
                 <form onSubmit={submitForm}>

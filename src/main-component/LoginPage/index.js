@@ -8,6 +8,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Link, useNavigate } from "react-router-dom";
 import loginImage from "../../images/Login/child.jpg";
+import logo from "../../images/Logo/FarmersHomeLogo.svg"
 
 import './style.scss';
 import { Box } from '@mui/material';
@@ -67,9 +68,14 @@ const LoginPage = (props) => {
             <Box component="img" sx={{height:"100vh"}}  src={loginImage} alt='loginImage'/>
             </Grid>
         <Grid xs={6}>
+            <Box sx={{display:"flex",justifyContent:"center",flexDirection:"column"}}>
+           
+        <Box component="img" src={logo} sx={{height:"15vh"}} mt={2} alt='loginImage'/>
 
+        </Box>
        
-            <Box className="loginForm" sx={{display:"flex",flexDirection:"column",padding:17}}>
+            <Box className="loginForm" sx={{display:"flex",flexDirection:"column",padding:5}}>
+            
                 <h2>Sign In</h2>
                 <p>Sign in to your account</p>
                 <form onSubmit={submitForm}>

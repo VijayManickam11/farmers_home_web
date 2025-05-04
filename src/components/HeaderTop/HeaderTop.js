@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import logo from '../../images/logo.svg'
+// import logo from '../../images/logo.svg'
+import logo from '../../images/Logo/FarmersHomeLogo.svg'
 import header1 from '../../images/header-shape1.png'
 import header2 from '../../images/header-shape2.png'
 
@@ -14,7 +15,7 @@ const HeaderTop = () => {
                 <div className="row align-items-center">
                     <div className="col-lg-3 col-12 d-lg-block d-none">
                         <Link className="navbar-brand" to="/">
-                            <img src={logo} alt="" />
+                            <img src={logo} alt="" style={{width:"100px",height:"70px"}}/>
                         </Link>
                     </div>
                     <div className="col-lg-9 col-12">
