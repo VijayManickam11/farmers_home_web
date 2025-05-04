@@ -22,7 +22,7 @@ const PopupQuickview = ({ product, addToCart, handleCloseClick }) => {
    
     return (
         <div id="popup-quickview">
-            <div className="modal-dialog quickview-dialog">
+            <div className="modal-dialog quickview-dialog" style={{backgroundColor: "#fff"}}>
                 <div className="modal-content">
                     <button type="button" className="btn-close" onClick={handleCloseClick}><i className="ti-close"></i></button>
                     <div className="modal-body">

@@ -1,0 +1,68 @@
+const ValidationMessages = {
+  AlertMessage: {
+    MSG001: "Successfully Logged in",
+    MSG002: "Registered successfully",
+    MSG047: "OTP has been sent to your mobile number successfully!",
+    MSG055: "OTP verified successfully!",
+    MSG056: "Your password has been created successfully!",
+  },
+  AlertQuestions: {
+    QUE001: "Are you sure you want to update the post?",
+    QUE002: "Are you sure you want to delete the post?",
+    QUE003: "Are you sure you want to delete the Card Details?",
+  },
+  ErrorMessage: {
+    ER001: "Invalid name",
+    ER002: "Invalid Email",
+    ER003: "Invalid OTP",
+    ER004: "Passwords mismatch!",
+    ER005: "Incorrect mobilenumber or password!",
+    ER006: "This email-Id is not registered with myHireCloud",
+    ER007: "Invalid password format",
+    ER008: "Not matching",
+    ER009: "Enter your Email-Id or Mobile number",
+    ER010: "Email Id not registered!",
+    ER011: "Invalid current password!",
+    ER012: "New password and confirm password does not matched!",
+    ER013: "Create password and confirm password do not match",
+    ER014: "File size must be less than 3 MB Acceptable file format - .jpg, .jpeg, .png",
+    ER015: "Enter Your Fullname",
+    ER016: "Invalid Email-Id or Mobile number",
+    ER017: "File size exceeded",      
+    ER018: "Please enter Email Id/Mobile Number. Either one should be mandatory.",
+    ER019: "New password can't be the same as old.",
+  },
+  fieldMessageEmpty: {
+    fullName: "Enter your name",
+    mobileNumber: "Enter your mobile number",
+    email: "Enter your email",
+    newPassword: "Enter your new password",
+    confirmPassword: "Enter your confirm password",
+    password: "Enter your password",
+    userType: "Select user type",
+    mappedRegion:"Select region",
+    projectEngineer:"Select technical manager",
+    hazard:"Enter your hazard",
+    description:"Enter your description",
+    emailId: "Enter your email",
+    equipmentRegion: "Select your equipment region",
+    equipmentAccreditation: "Select your accreditation",
+    equipmentName: "Enter your equipment name",
+    regionName: "Enter region name",
+    regionDeatils: "Enter region details",
+    inspectionFrequency:"Select inspection frequency"
+
+  },
+  fieldMessageInvalid: {
+    fullName: "Invalid name",
+    mobileNumber: "Mobile number must be 10 digit",
+    email: "Invalid email",
+    emailId: "Invalid email",
+    newPassword: "Invalid new password",
+    confirmPassword: "New password and confirm password does not match",
+    regionName: "Enter region name",
+    regionDeatils: "Enter region details"
+  },
+
+};
+export default ValidationMessages;

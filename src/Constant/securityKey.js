@@ -1,0 +1,1 @@
+export const CRYPTO_SECURITY_KEY = 'poihjkloimnbhjkl';
