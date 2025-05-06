@@ -11,11 +11,16 @@ import loginImage from "../../images/Login/child.jpg";
 import logo from "../../images/Logo/FarmersHomeLogo.svg"
 
 import './style.scss';
-import { Box } from '@mui/material';
+import { Box, Dialog, DialogContent, useMediaQuery, useTheme } from '@mui/material';
 
 
 
-const LoginPage = (props) => {
+
+const LoginPage = ({open, onClose }) => {
+
+    const theme = useTheme();
+
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const push = useNavigate()
 
@@ -63,27 +68,31 @@ const LoginPage = (props) => {
         }
     };
     return (
+        <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" fullScreen={fullScreen}>
+              
+              <DialogContent>
         <Grid container>
-            <Grid xs={6}>
+            {/* <Grid xs={6}>
             <Box component="img" sx={{height:"100vh"}}  src={loginImage} alt='loginImage'/>
-            </Grid>
-        <Grid xs={6}>
+            </Grid> */}
+        <Grid xs={12}>
             <Box sx={{display:"flex",justifyContent:"center",flexDirection:"column"}}>
            
-        <Box component="img" src={logo} sx={{height:"15vh"}} mt={2} alt='loginImage'/>
+        <Box component="img" src={logo} sx={{height:"15vh"}} mt={0} alt='loginImage'/>
 
         </Box>
        
-            <Box className="loginForm" sx={{display:"flex",flexDirection:"column",padding:5}}>
+            <Box className="loginForm" sx={{display:"flex",flexDirection:"column",padding:1}}>
             
                 <h2>Sign In</h2>
                 <p>Sign in to your account</p>
                 <form onSubmit={submitForm}>
                     <Grid container spacing={3}>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <TextField
                                 className="inputOutline"
                                 fullWidth
+                                size="small"
                                 placeholder="E-mail"
                                 value={value.email}
                                 variant="outlined"
@@ -97,10 +106,11 @@ const LoginPage = (props) => {
                             />
                             {validator.message('email', value.email, 'required|email')}
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <TextField
                                 className="inputOutline"
                                 fullWidth
+                                size="small"
                                 placeholder="Password"
                                 value={value.password}
                                 variant="outlined"
@@ -115,7 +125,9 @@ const LoginPage = (props) => {
                             />
                             {validator.message('password', value.password, 'required')}
                         </Grid>
-                        <Grid item xs={12}>
+                        
+                    </Grid>
+                    <Grid item xs={12} mt={1}>
                             <Grid className="formAction" sx={{display:"flex",justifyContent:"space-between"}}>
                                 <Box sx={{display:"flex",flexDirection:"column",justifyContent:"center"}}>
                                 <FormControlLabel
@@ -127,18 +139,19 @@ const LoginPage = (props) => {
                                 <Link to="/forgot" style={{float:"right"}}>Forgot Password?</Link>
                                 </Box>
                             </Grid>
-                            <Grid className="formFooter" mt={2}>
-                                <Button fullWidth className="cBtnTheme" type="submit">Login</Button>
+                            <Grid className="formFooter" mt={1} sx={{display:"flex",justifyContent:"center"}}>
+                                <Button fullWidth className="cBtnTheme" type="submit" sx={{width:"53%"}}>Login</Button>
                             </Grid>
-                            <Grid className="loginWithSocial" sx={{textAlign:"center"}} mt={3} mb={2}>
+                            <Grid className="loginWithSocial" sx={{textAlign:"center"}} mt={2} mb={1}>
                                 <Button className="facebook" sx={{backgroundColor:"#3b5998"}}><i className="fa fa-facebook" style={{color:"white"}}></i></Button>
                                 <Button className="twitter" sx={{backgroundColor:"#55acee",ml:2}}><i className="fa fa-twitter" style={{color:"white"}}></i></Button>
                                 <Button className="linkedin" sx={{backgroundColor:"#0077B5",ml:2}}><i className="fa fa-linkedin" style={{color:"white"}}></i></Button>
                             </Grid>
-                            <p className="noteHelp" style={{textAlign:"center"}}>Don't have an account? <Link to="/register">Create free account</Link>
+                            <p className="noteHelp" style={{textAlign:"center"}}>Don't have an account? <Link to="" onClick={() => {
+                                onClose();
+                            }}>Create free account</Link>
                             </p>
                         </Grid>
-                    </Grid>
                 </form>
                 <div className="shape-img">
                     <i className="fi flaticon-honeycomb"></i>
@@ -148,6 +161,8 @@ const LoginPage = (props) => {
             
         </Grid>
         </Grid>
+        </DialogContent>
+        </Dialog>
     )
 };
 

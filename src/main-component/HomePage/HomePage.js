@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import HeaderTop from '../../components/HeaderTop/HeaderTop';
 import Navbar from '../../components/Navbar/Navbar'
 import HeroSlider from '../../components/HeroSlider/HeroSlider';
@@ -15,8 +15,19 @@ import BlogSection from '../../components/BlogSection/BlogSection';
 import Footer from '../../components/footer/Footer';
 import Scrollbar from '../../components/scrollbar/scrollbar';
 import Logo from '../../images/logo.svg'
+import SignUpModal from '../SignUpPage';
 
 const HomePage = () => {
+    const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowModal(true);
+    }, 3000); // 3 minutes = 180000 ms
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []);
+
     return (
         <Fragment>
             <HeaderTop />
@@ -36,6 +47,8 @@ const HomePage = () => {
             <BlogSection />
             <Footer hclass={'footer-section'} />
             <Scrollbar />
+            <SignUpModal open={showModal} onClose={() => setShowModal(false)} />
+            
         </Fragment>
     )
 };

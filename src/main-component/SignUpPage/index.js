@@ -13,11 +13,17 @@ import logo from "../../images/Logo/FarmersHomeLogo.svg"
       
 
 // import './style.scss';
-import { Box } from '@mui/material';   
+import { Box, Dialog, DialogContent, DialogTitle, useMediaQuery, useTheme } from '@mui/material';   
+import LoginPage from '../LoginPage';
 
-const SignUpPage = (props) => {
+const SignUpPage = ({open, onClose }) => {
+
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const push = useNavigate()
+
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
     const [value, setValue] = useState({
         email: '',
@@ -51,28 +57,30 @@ const SignUpPage = (props) => {
             });
             validator.hideMessages();
             toast.success('Registration Complete successfully!');
-            push('/login');
+            // push('/login');
+            setShowLoginModal(true)
+            onClose();
         } else {
             validator.showMessages();
             toast.error('Empty field is not allowed!');
         }
     };
     return (
-        <Grid container>
+        <React.Fragment>
+        <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" fullScreen={fullScreen}>
+      
+      <DialogContent>
+      
+        <Grid container>        
 
-           <Grid xs={6}>
-           <Box component="img" sx={{height:"100vh"}}  src={loginImage} alt='loginImage'/>
-
-
-            </Grid>
-
-            <Grid xs={6} >
+            <Grid xs={12} >
+                
                 <Box sx={{display:"flex",justifyContent:"center",flexDirection:"column"}}>
                            
-                        <Box component="img" src={logo} sx={{height:"15vh"}} mt={2} alt='loginImage'/>
+                        <Box component="img" src={logo} sx={{height:"15vh"}} mt={0} alt='loginImage'/>
                 
                         </Box>
-               <Box sx={{padding:3,display:"flex",flexDirection:"column",justifyContent:"center"}}>
+               <Box sx={{padding:1,display:"flex",flexDirection:"column",justifyContent:"center"}}>
                 <h2>Signup</h2>
                 <p>Signup your account</p>
                 <form onSubmit={submitForm}>
@@ -81,6 +89,7 @@ const SignUpPage = (props) => {
                             <TextField
                                 className="inputOutline"
                                 fullWidth
+                                size='small'
                                 placeholder="Full Name"
                                 value={value.full_name}
                                 variant="outlined"
@@ -98,6 +107,7 @@ const SignUpPage = (props) => {
                             <TextField
                                 className="inputOutline"
                                 fullWidth
+                                 size='small'
                                 placeholder="E-mail"
                                 value={value.email}
                                 variant="outlined"
@@ -115,6 +125,7 @@ const SignUpPage = (props) => {
                             <TextField
                                 className="inputOutline"
                                 fullWidth
+                                 size='small'
                                 placeholder="Mobile Number"
                                 value={value.mobileNumber}
                                 variant="outlined"
@@ -132,6 +143,7 @@ const SignUpPage = (props) => {
                             <TextField
                                 className="inputOutline"
                                 fullWidth
+                                 size='small'
                                 placeholder="Address"
                                 value={value.address}
                                 variant="outlined"
@@ -149,6 +161,7 @@ const SignUpPage = (props) => {
                             <TextField
                                 className="inputOutline"
                                 fullWidth
+                                 size='small'
                                 placeholder="Password"
                                 value={value.password}
                                 variant="outlined"
@@ -166,6 +179,7 @@ const SignUpPage = (props) => {
                             <TextField
                                 className="inputOutline"
                                 fullWidth
+                                 size='small'
                                 placeholder="Confirm Password"
                                 value={value.password}
                                 variant="outlined"
@@ -189,8 +203,14 @@ const SignUpPage = (props) => {
                                 <Button className="twitter" sx={{backgroundColor:"#55acee",ml:2}}><i className="fa fa-twitter" style={{color:"white"}}></i></Button>
                                 <Button className="linkedin" sx={{backgroundColor:"#0077B5",ml:2}}><i className="fa fa-linkedin" style={{color:"white"}}></i></Button>
                             </Grid>
-                            <p className="noteHelp" style={{textAlign:"center"}}>Already have an account? <Link to="/">Return to Sign In</Link>
+                            <Box sx={{display:"flex",flexDirection:"row",justifyContent:"center"}}>
+                            <p className="noteHelp" style={{textAlign:"center"}}>Already have an account?
                             </p>
+                            <p style={{color:"blue",marginLeft:"5px",cursor:"pointer"}} onClick={() => {
+                                setShowLoginModal(true);
+                                onClose();
+                            }}>Return to Sign In</p>
+                            </Box>
                         </Grid>
                     </Grid>
                 </form>
@@ -200,6 +220,10 @@ const SignUpPage = (props) => {
                 </Box>
             </Grid>
         </Grid>
+        </DialogContent>
+        </Dialog>
+        <LoginPage open={showLoginModal} onClose={() => setShowLoginModal(false)}/>
+        </React.Fragment>
     )
 };
 
