@@ -20,18 +20,18 @@ import SignUpModal from '../SignUpPage';
 const HomePage = () => {
     const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowModal(true);
-    }, 3000); // 3 minutes = 180000 ms
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowModal(true);
+  //   }, 3000); 
 
-    return () => clearTimeout(timer); // Cleanup on unmount
-  }, []);
+  //   return () => clearTimeout(timer); 
+  // }, []);
 
     return (
         <Fragment>
             <HeaderTop />
-            <Navbar hclass={'wpo-site-header'} Logo={Logo} />
+            <Navbar hclass={'wpo-site-header'} Logo={Logo} setShowModal={setShowModal}/>
             <div className="orico-hero-wrap">
                 <HeroSlider />
                 <OricoFeatures />
