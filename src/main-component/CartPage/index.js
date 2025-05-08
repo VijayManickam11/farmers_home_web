@@ -73,7 +73,7 @@ const CartPage = (props) => {
                                     >
                                       -
                                     </span>
-                                    <input value={catItem.qty} type="text" />
+                                    <input value={catItem.quantity} type="text" />
                                     <span
                                       className="inc qtybutton"
                                       onClick={() =>
@@ -85,8 +85,8 @@ const CartPage = (props) => {
                                   </Grid>
                                 </div>
                               </td>
-                              <td className="ptice">${catItem.qty * catItem.price}</td>
-                              <td className="stock">${catItem.qty * catItem.price}</td>
+                              <td className="ptice">${catItem.quantity * catItem.price}</td>
+                              <td className="stock">${catItem.quantity * catItem.price}</td>
                               <td className="action">
                                 <ul>
                                   <li

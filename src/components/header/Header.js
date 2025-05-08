@@ -291,7 +291,7 @@ const Header = (props) => {
                               <div className="mini-cart-item-des">
                                 <p>{catItem.product.name} </p>
                                 <span className="mini-cart-item-price">
-                                  ${catItem.product.price} x {catItem.qty}
+                                  ${catItem.product.price} x {catItem.quantity}
                                 </span>
                                 <span className="mini-cart-item-quantity">
                                   <button
@@ -310,7 +310,7 @@ const Header = (props) => {
                       <div className="mini-cart-action clearfix">
                         <span className="mini-checkout-price">
                           Subtotal: 
-                          {/* <span> ${totalPrice(carts)}</span> */}
+                          <span> ${totalPrice(carts)}</span>
                         </span>
                         <div className="mini-btn">
                           <Link to="/checkout" className="view-cart-btn s1">

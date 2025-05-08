@@ -56,8 +56,8 @@ const ProductSection = ({ addToCart }) => {
       (product.category && product.category.includes(filter.slice(1)))
   );
 
-  const addToCartProduct = (product, qty = 1) => {
-    addToCart(product, qty);
+  const addToCartProduct = (product, quantity = 1) => {
+    addToCart(product, quantity);
   };
 
   return (

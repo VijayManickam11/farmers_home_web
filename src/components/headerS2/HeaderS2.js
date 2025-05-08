@@ -290,7 +290,7 @@ const HeaderS2 = (props) => {
                               <div className="mini-cart-item-des">
                                 <p>{catItem.product.name} </p>
                                 <span className="mini-cart-item-price">
-                                  ${catItem.product.price} x {catItem.qty}
+                                  ${catItem.product.price} x {catItem.quantity}
                                 </span>
                                 <span className="mini-cart-item-quantity">
                                   <button

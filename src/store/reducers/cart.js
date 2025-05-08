@@ -14,7 +14,7 @@ export const cartReducer = (state = init, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       const productId = action.product.id;
-      const productQty = action.qty ? action.qty : 1;
+      const productQty = action.quantity ? action.quantity : 1;
       if (state.cart.findIndex((product) => product.id === productId) !== -1) {
         const cart = state.cart.reduce((cartAcc, product) => {
           if (product.id === productId) {
@@ -22,11 +22,11 @@ export const cartReducer = (state = init, action) => {
               ...product,
               selected_color: action.color,
               selected_size: action.size,
-              qty: product.qty + productQty,
+              quantity: product.quantity + productQty,
               sum:
                 ((product.price * product.discount) / 100) *
-                (product.qty + productQty),
-            }); // Increment qty
+                (product.quantity + productQty),
+            }); // Increment quantity
           } else {
             cartAcc.push(product);
           }
@@ -45,10 +45,10 @@ export const cartReducer = (state = init, action) => {
             ...action.product,
             selected_color: action.color,
             selected_size: action.size,
-            qty: action.qty,
+            quantity: action.quantity,
             sum:
               ((action.product.price * action.product.discount) / 100) *
-              action.qty,
+              action.quantity,
           },
         ],
       };
@@ -64,7 +64,7 @@ export const cartReducer = (state = init, action) => {
         if (product.id === inc_productId) {
           cartAcc.push({
             ...product,
-            qty: product.qty + 1,
+            quantity: product.quantity + 1,
           });
         } else {
           cartAcc.push(product);
@@ -79,7 +79,7 @@ export const cartReducer = (state = init, action) => {
         if (product.id === decProductId) {
           cartAcc.push({
             ...product,
-            qty: minValueOne(product.qty - 1),
+            quantity: minValueOne(product.quantity - 1),
           });
         } else {
           cartAcc.push(product);

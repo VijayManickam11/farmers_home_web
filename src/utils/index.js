@@ -8,7 +8,7 @@ function getFeaturedProducts(products) {
 
 function totalPrice(items) {
     return items.reduce((itemAcc, item) => {
-        return itemAcc += (item.price * item.qty);
+        return itemAcc += (item.product.price * item.quantity);
     }, 0);
 }
 
@@ -39,11 +39,11 @@ function isEquals(a, b) {
     return a === b
 }
 
-function minValueOne(qty) {
-    if (qty < 1) {
+function minValueOne(quantity) {
+    if (quantity < 1) {
         return 1;
     }
-    return qty;
+    return quantity;
 }
 
 // filter function

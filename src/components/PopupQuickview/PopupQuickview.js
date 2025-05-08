@@ -15,8 +15,8 @@ const PopupQuickview = ({ product, addToCart, handleCloseClick }) => {
     };
 
     if (!product) return null;
-    const addToCartProduct = (product, qty = 1) => {
-        addToCart(product, qty);
+    const addToCartProduct = (product, quantity = 1) => {
+        addToCart(product, quantity);
     };
 
    

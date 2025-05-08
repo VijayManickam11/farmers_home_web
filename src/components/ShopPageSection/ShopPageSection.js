@@ -46,8 +46,7 @@ const ShopPageSection = ({ addToCart }) => {
     fetchProducts();
   }, []);
 
-  const addToCartProduct = async (product, qty = 1) => {
-
+  const addToCartProduct = async (product, quantity = 1) => {
     const responseData = await CartController.postAddCart({
       product_uid: product.product_uid,
     });
@@ -55,7 +54,7 @@ const ShopPageSection = ({ addToCart }) => {
     const parseData = JSON.parse(responseData);
     console.log(parseData);
 
-    if(parseData.status == "SUCCESS") {
+    if (parseData.status == "SUCCESS") {
       toast.success(`${product.name} Added to Cart`);
     }
   };
@@ -142,8 +141,17 @@ const ShopPageSection = ({ addToCart }) => {
                             </h2>
                             <div className="product-price">
                               <ul>
-                                <li>${product.price}</li>
-                                <li>${product.discount_price}</li>
+                                <li>
+                                  {product.discount_price
+                                    ? `$${product.price}`
+                                    : ""}
+                                </li>
+                                <li>
+                                  $
+                                  {product.discount_price
+                                    ? product.discount_price
+                                    : product.price}
+                                </li>
                               </ul>
                             </div>
                           </div>
@@ -182,8 +190,17 @@ const ShopPageSection = ({ addToCart }) => {
                             </h2>
                             <div className="product-price">
                               <ul>
-                                <li>${product.price}</li>
-                                <li>${product.discount_price}</li>
+                                <li>
+                                  {product.discount_price
+                                    ? `$${product.price}`
+                                    : ""}
+                                </li>
+                                <li>
+                                  $
+                                  {product.discount_price
+                                    ? product.discount_price
+                                    : product.price}
+                                </li>
                               </ul>
                             </div>
                             <a
@@ -267,8 +284,17 @@ const ShopPageSection = ({ addToCart }) => {
                             </h2>
                             <div className="product-price">
                               <ul>
-                                <li>${product.discount_price}</li>
-                                <li>${product.price}</li>
+                                <li>
+                                  {product.discount_price
+                                    ? `$${product.price}`
+                                    : ""}
+                                </li>
+                                <li>
+                                  $
+                                  {product.discount_price
+                                    ? product.discount_price
+                                    : product.price}
+                                </li>
                               </ul>
                             </div>
                             <p>
