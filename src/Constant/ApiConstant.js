@@ -40,6 +40,12 @@ export const apiEndPoint = {
     PUT_PRODUCT_DATA:"/product/:product_uid",
     DELETE_PRODUCT_DATA:"/product/:product_uid",
     
+    GET_CART_LIST: "/carts",
+    POST_CART:"/cart",
+    GET_THE_SINGLE_CART:"/cart/:cart_uid",
+    PUT_CART_DATA:"/cart/:cart_uid",
+    DELETE_CART_DATA:"/cart/:cart_uid",
+    
 };
 
 export const apiType = {

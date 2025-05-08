@@ -5,6 +5,10 @@ import api from "../../api";
 import { addToCart } from "../../store/actions/action";
 import PopupQuickview from "../PopupQuickview/PopupQuickview";
 import AddProductController from "../../Controller/ProductController";
+import CartController from "../../Controller/CartController";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+
 const ShopPageSection = ({ addToCart }) => {
   const [shopeTab, setShopeTab] = useState(0);
 
@@ -42,8 +46,18 @@ const ShopPageSection = ({ addToCart }) => {
     fetchProducts();
   }, []);
 
-  const addToCartProduct = (product, qty = 1) => {
-    addToCart(product, qty);
+  const addToCartProduct = async (product, qty = 1) => {
+
+    const responseData = await CartController.postAddCart({
+      product_uid: product.product_uid,
+    });
+
+    const parseData = JSON.parse(responseData);
+    console.log(parseData);
+
+    if(parseData.status == "SUCCESS") {
+      toast.success(`${product.name} Added to Cart`);
+    }
   };
   return (
     <div className="shop-section section-padding">
@@ -168,8 +182,8 @@ const ShopPageSection = ({ addToCart }) => {
                             </h2>
                             <div className="product-price">
                               <ul>
-                                <li>${product.discount_price}</li>
                                 <li>${product.price}</li>
+                                <li>${product.discount_price}</li>
                               </ul>
                             </div>
                             <a
