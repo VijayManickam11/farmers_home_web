@@ -3914,7 +3914,7 @@ nav.navigation.navbar.navbar-expand-lg.navbar-light.sticky-header.sticky-on .row
 /* 3.4 orico-fun-fact-section */
 .orico-fun-fact-section {
   text-align: center;
-  background: #F78914;
+  background: green !important;
   padding: 40px 0;
   position: relative;
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import CountUp from 'react-countup';
 
-import Fa1 from '../../images/funfact/s1.png'
-import Fa2 from '../../images/funfact/s2.png'
+import Fa1 from '../../images/funfact/s01.png'
+import Fa2 from '../../images/funfact/s01.png'
 import FaIcon1 from '../../images/funfact/1.svg'
 import FaIcon2 from '../../images/funfact/2.svg'
 import FaIcon3 from '../../images/funfact/3.svg'

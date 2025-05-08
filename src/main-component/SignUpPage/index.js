@@ -36,7 +36,7 @@ const SignUpPage = ({open, onClose }) => {
 
     const changeHandler = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value });
-        validator.showMessages();
+        // validator.showMessages();
     };
 
     const [validator] = React.useState(new SimpleReactValidator({

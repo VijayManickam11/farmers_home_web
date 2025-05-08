@@ -4,6 +4,7 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 import { totalPrice } from "../../utils";
 import { connect } from "react-redux";
 import { removeFromCart } from "../../store/actions/action";
+import ProfileImage from "../../images/icon/UserProfile.png";
 import CartController from "../../Controller/CartController";
 
 const Header = (props) => {
@@ -224,6 +225,7 @@ const Header = (props) => {
               </div>
               <div className="col-lg-5 col-md-2 col-2">
                 <div className="header-right">
+                                    <img src={ProfileImage} onClick={() => props.setShowModal(true)} style={{width:"65px",height:"50px"}} alt='profileImage'/>
                   <div className="header-search-form-wrapper">
                     <div className="cart-search-contact">
                       <button
