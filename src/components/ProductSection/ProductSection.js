@@ -140,7 +140,7 @@ const ProductSection = ({ addToCart }) => {
                             >
                               {product?.base64Image && (
                                 <img
-                                  src={product?.base64Image || ""}
+                                  src={product?.base64Image}
                                   alt={product.name}
                                   style={{
                                     width: "100%",

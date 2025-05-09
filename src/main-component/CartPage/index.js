@@ -22,6 +22,8 @@ const CartPage = (props) => {
 
   const { carts } = props;
 
+  console.log(carts,"cartscarts")
+
   return (
     <Fragment>
       <HeaderTop />
@@ -51,14 +53,14 @@ const CartPage = (props) => {
                           carts.map((catItem, crt) => (
                             <tr key={crt}>
                               <td className="images">
-                                <img src={catItem.proImg} alt="" />
+                                <img src={catItem.base64Image} alt="base64Image" />
                               </td>
                               <td className="product">
                                 <ul>
                                   <li className="first-cart">
-                                    {catItem.title}
+                                    {catItem.name}
                                   </li>
-                                  <li>Brand : {catItem.brand}</li>
+                                  <li>Category : {catItem.category}</li>
                                   <li>Size : {catItem.size}</li>
                                 </ul>
                               </td>
@@ -73,7 +75,7 @@ const CartPage = (props) => {
                                     >
                                       -
                                     </span>
-                                    <input value={catItem.quantity} type="text" />
+                                    <input value={catItem.qty} type="text" />
                                     <span
                                       className="inc qtybutton"
                                       onClick={() =>
@@ -85,8 +87,8 @@ const CartPage = (props) => {
                                   </Grid>
                                 </div>
                               </td>
-                              <td className="ptice">${catItem.quantity * catItem.price}</td>
-                              <td className="stock">${catItem.quantity * catItem.price}</td>
+                              <td className="ptice">${catItem.qty * catItem.price}</td>
+                              <td className="stock">${catItem.qty * catItem.price}</td>
                               <td className="action">
                                 <ul>
                                   <li
@@ -126,7 +128,9 @@ const CartPage = (props) => {
                         Total product<span>( {carts.length} )</span>
                       </li>
                       <li>
-                        Sub Price<span>${totalPrice(carts)}</span>
+                        Sub Price<span>
+                          {totalPrice(carts)}
+                          </span>
                       </li>
                       <li>
                         Vat<span>$0</span>
@@ -138,7 +142,9 @@ const CartPage = (props) => {
                         Delivery Charge<span>$0</span>
                       </li>
                       <li className="cart-b">
-                        Total Price<span>${totalPrice(carts)}</span>
+                        Total Price<span>
+                          {totalPrice(carts)}
+                          </span>
                       </li>
                     </ul>
                   </div>

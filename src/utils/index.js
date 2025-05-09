@@ -8,7 +8,7 @@ function getFeaturedProducts(products) {
 
 function totalPrice(items) {
     return items.reduce((itemAcc, item) => {
-        return itemAcc += (item.product.price * item.quantity);
+        return itemAcc += (item.price * item.qty);
     }, 0);
 }
 
