@@ -46,7 +46,8 @@ export const apiEndPoint = {
     PUT_CART_DATA:"/cart/:cart_uid",
     DELETE_CART_DATA:"/cart/:cart_uid",
 
-    USER_REGISTER: "/registerNew"
+    USER_REGISTER: "/registerNew",
+    USER_LOGIN: "/userLogin"
     
 };
 

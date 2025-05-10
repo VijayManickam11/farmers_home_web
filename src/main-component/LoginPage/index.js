@@ -12,6 +12,7 @@ import logo from "../../images/Logo/FarmersHomeLogo.svg"
 
 import './style.scss';
 import { Box, Dialog, DialogContent, useMediaQuery, useTheme } from '@mui/material';
+import RegisterController from '../../Controller/RegisterController';
 
 
 
@@ -45,28 +46,53 @@ const LoginPage = ({open, onClose }) => {
 
 
 
-    const submitForm = (e) => {
+    // const submitForm = (e) => {
+    //     e.preventDefault();
+    //     if (validator.allValid()) {
+    //         setValue({
+    //             email: '',
+    //             password: '',
+    //             remember: false
+    //         });
+    //         validator.hideMessages();
+
+    //         const userRegex = /^user+.*/gm;
+    //         const email = value.email;
+
+    //         if (email.match(userRegex)) {
+    //             toast.success('Successfully Login on istiqbal !');
+    //             push('/dashboard');
+    //         }
+    //     } else {
+    //         validator.showMessages();
+    //         toast.error('Empty field is not allowed!');
+    //     }
+    // };
+
+    const submitForm = async(e) =>{
         e.preventDefault();
-        if (validator.allValid()) {
-            setValue({
-                email: '',
-                password: '',
-                remember: false
-            });
-            validator.hideMessages();
+        try{
 
-            const userRegex = /^user+.*/gm;
-            const email = value.email;
-
-            if (email.match(userRegex)) {
-                toast.success('Successfully Login on istiqbal !');
-                push('/dashboard');
+            const formSubmitedData = {
+                email: value.email,
+                password: value.password
             }
-        } else {
-            validator.showMessages();
-            toast.error('Empty field is not allowed!');
+
+            const response = await RegisterController.postUserLogin(formSubmitedData);
+
+            const parsedData = JSON.parse(response);
+            if(parsedData.status == "SUCCESS"){
+                toast.success('Successfully Login...');
+                onClose();
+                setValue({});
+            }
+
+        }catch(error){
+            console.log(error);
+            
         }
-    };
+    }
+
     return (
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" fullScreen={fullScreen}>
               
