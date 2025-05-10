@@ -86,10 +86,9 @@ const Footer = (props) => {
                                     </div>
                                     <div className="contact-ft">
                                         <ul>
-                                            <li><i className="fi flaticon-placeholder"></i>7 Green Lake Street Crawfordsville,
-                                                IN 47933
+                                            <li><i className="fi flaticon-placeholder"></i>Coimbatore, Tamil Nadu, India.
                                             </li>
-                                            <li><i className="fi flaticon-phone-call"></i>+1 800 123 456 789</li>
+                                            <li><i className="fi flaticon-phone-call"></i>+91 9677703476</li>
                                             <li><i className="fi flaticon-email"></i>Organtio@gmail.com</li>
                                         </ul>
                                     </div>

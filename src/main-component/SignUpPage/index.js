@@ -15,6 +15,7 @@ import logo from "../../images/Logo/FarmersHomeLogo.svg"
 // import './style.scss';
 import { Box, Dialog, DialogContent, DialogTitle, useMediaQuery, useTheme } from '@mui/material';   
 import LoginPage from '../LoginPage';
+import RegisterController from '../../Controller/RegisterController';
 
 const SignUpPage = ({open, onClose }) => {
 
@@ -43,28 +44,35 @@ const SignUpPage = ({open, onClose }) => {
         className: 'errorMessage'
     }));
 
-
-    const submitForm = (e) => {
+    const submitForm = async (e) =>{
         e.preventDefault();
-        if (validator.allValid()) {
-            setValue({
-                email: '',
-                full_name: '',
-                mobileNumber:"",
-                address:"",
-                password: '',
-                confirm_password: '',
-            });
-            validator.hideMessages();
-            toast.success('Registration Complete successfully!');
-            // push('/login');
-            setShowLoginModal(true)
-            onClose();
-        } else {
-            validator.showMessages();
-            toast.error('Empty field is not allowed!');
+        try{
+
+            const formSubmitedData = {
+                full_name: value.full_name,
+                email: value.email,
+                mobile_number: value.mobileNumber,
+                user_address: value.address,
+                password: value.password,
+                confirm_password: value.confirm_password
+            }            
+
+            const response = await RegisterController.postUserRegister(formSubmitedData);
+
+            let parsedData = JSON.parse(response);
+
+            if(parsedData.status == "SUCCESS"){
+                toast.success('Registration Complete successfully!');
+                onClose();
+                setValue({});
+            }          
+
+        }catch(error){
+            console.log(error);
+            toast.error(error);            
         }
-    };
+    }
+
     return (
         <React.Fragment>
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" fullScreen={fullScreen}>
@@ -134,6 +142,7 @@ const SignUpPage = ({open, onClose }) => {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
+                                inputProps={{maxLength: 10}}
                                 onBlur={(e) => changeHandler(e)}
                                 onChange={(e) => changeHandler(e)}
                             />
@@ -181,7 +190,7 @@ const SignUpPage = ({open, onClose }) => {
                                 fullWidth
                                  size='small'
                                 placeholder="Confirm Password"
-                                value={value.password}
+                                value={value.confirm_password}
                                 variant="outlined"
                                 name="confirm_password"
                                 label="Confirm Password"

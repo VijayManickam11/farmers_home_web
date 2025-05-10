@@ -15,7 +15,7 @@ const HeaderTopS2 = () => {
                                         <i className="fi flaticon-phone-call"></i>
                                     </div>
                                     <div className="info-text">
-                                        <p>00 567 458 796 47</p>
+                                        <p>+91 9677703476</p>
                                     </div>
                                 </div>
                                 <div className="contact-info">
@@ -31,7 +31,7 @@ const HeaderTopS2 = () => {
                                         <i className="fi flaticon-placeholder"></i>
                                     </div>
                                     <div className="info-text">
-                                        <p>Nagata Kundo, 82-A, USA.</p>
+                                        <p>Coimbatore, Tamil Nadu, India.</p>
                                     </div>
                                 </div>
                             </div>

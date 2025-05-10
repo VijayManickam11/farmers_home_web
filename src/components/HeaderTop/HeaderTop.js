@@ -26,7 +26,7 @@ const HeaderTop = () => {
                                 </div>
                                 <div className="info-text">
                                     <span>Call Us:</span>
-                                    <p>00 567 458 796 47</p>
+                                    <p>+91 9677703476</p>
                                 </div>
                             </div>
                             <div className="contact-info">
@@ -44,7 +44,7 @@ const HeaderTop = () => {
                                 </div>
                                 <div className="info-text">
                                     <span>Our Location:</span>
-                                    <p>Nagata Kundo, 82-A, USA.</p>
+                                    <p>Coimbatore, Tamil Nadu, India.</p>
                                 </div>
                             </div>
                         </div>
