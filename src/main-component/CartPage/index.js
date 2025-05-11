@@ -142,8 +142,8 @@ const CartPage = (props) => {
                                   </Grid>
                                 </div>
                               </td>
-                              <td className="ptice">${catItem?.quantity * catItem?.product?.price}</td>
-                              <td className="stock">${catItem?.quantity * catItem?.product?.price}</td>
+                              <td className="ptice">₹{catItem?.quantity * catItem?.product?.price}</td>
+                              <td className="stock">₹{catItem?.quantity * catItem?.product?.price}</td>
                               <td className="action">
                                 <ul>
                                   <li
@@ -188,13 +188,13 @@ const CartPage = (props) => {
                           </span>
                       </li>
                       <li>
-                        Vat<span>$0</span>
+                        Vat<span>₹0</span>
                       </li>
                       <li>
-                        Eco Tax<span>$0</span>
+                        Eco Tax<span>₹0</span>
                       </li>
                       <li>
-                        Delivery Charge<span>$0</span>
+                        Delivery Charge<span>₹0</span>
                       </li>
                       <li className="cart-b">
                         Total Price<span>

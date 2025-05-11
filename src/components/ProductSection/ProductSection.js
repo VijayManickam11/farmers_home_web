@@ -168,8 +168,8 @@ const ProductSection = ({ addToCart }) => {
                           </h2>
                           <div className="product-price">
                             <ul>
-                              <li>${product.price}</li>
-                              {product.discount_price && <li>${product.discount_price}</li>}
+                              <li>₹{product.price}</li>
+                              {product.discount_price && <li>₹{product.discount_price}</li>}
                             </ul>
                           </div>
                         </div>
@@ -206,8 +206,8 @@ const ProductSection = ({ addToCart }) => {
                           </h2>
                           <div className="product-price">
                             <ul>
-                              <li>${product.price}</li>
-                              {product.discount_price && <li>${product.discount_price}</li>}
+                              <li>₹{product.price}</li>
+                              {product.discount_price && <li>₹{product.discount_price}</li>}
                             </ul>
                           </div>
                           <button

@@ -11,12 +11,41 @@ import "react-toastify/dist/ReactToastify.min.css";
 
 const ShopPageSection = ({ addToCart }) => {
   const [shopeTab, setShopeTab] = useState(0);
+  const [filter, setFilter] = useState("*");
+  const [category, setCategory] = useState("All");
 
   const ClickHandler = () => {
     window.scrollTo(10, 0);
   };
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleFilterChange = (newFilter) => {
+  setCategory(newFilter);
+  // setFilter(newFilter);
+  };
+
+  useEffect(() => { 
+    const fetchProducts = async () => {
+      let data = {
+        category:category
+      }
+      const response = await AddProductController.getProductListData(data);
+
+      const parseData = JSON.parse(response);
+
+      let productData = parseData?.data?.data;
+
+      console.log(productData, "productData");
+
+      if (parseData.status == "SUCCESS") {
+        setProducts(productData);
+      }
+      // const productsArray = await api();
+      // setProducts(productsArray);
+    };
+    fetchProducts();
+  }, [category]);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -59,8 +88,12 @@ const ShopPageSection = ({ addToCart }) => {
     }
   };
   return (
-    <div className="shop-section section-padding">
-      <div className="container">
+
+
+    <div className="shop-section section-padding orico-product-section section-padding">
+
+
+      <div className="container product-wrap">
         <div className="row">
           <div className="col-lg-12">
             <div className="shop-section-top-inner">
@@ -100,6 +133,60 @@ const ShopPageSection = ({ addToCart }) => {
                 </ul>
               </div>
             </div>
+
+            <div className="container">
+              <div className="product-wrap">
+                <div className="row">
+                  <div className="col col-xs-12 sortable-gallery">
+                    <div className="gallery-filters">
+                      <ul className="product-filter-btn">
+                        <li>
+                          <button
+                            className={`product-btn ${
+                              filter === "*" ? "current" : ""
+                            }`}
+                            onClick={() => handleFilterChange("All")}
+                          >
+                            all
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className={`product-btn ${
+                              filter === ".fruit" ? "current" : ""
+                            }`}
+                            onClick={() => handleFilterChange("fruites")}
+                          >
+                            fruits
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className={`product-btn ${
+                              filter === ".vegetables" ? "current" : ""
+                            }`}
+                            onClick={() => handleFilterChange("vegetables")}
+                          >
+                            vegetables
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className={`product-btn ${
+                              filter === ".milk" ? "current" : ""
+                            }`}
+                            onClick={() => handleFilterChange("grocery")}
+                          >
+                          Grocery
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
             <div className="tab-content">
               {shopeTab === 0 && (
                 <div className="row">
@@ -147,7 +234,7 @@ const ShopPageSection = ({ addToCart }) => {
                                     : ""}
                                 </li>
                                 <li>
-                                  $
+                                  ₹
                                   {product.discount_price
                                     ? product.discount_price
                                     : product.price}
@@ -196,7 +283,7 @@ const ShopPageSection = ({ addToCart }) => {
                                     : ""}
                                 </li>
                                 <li>
-                                  $
+                                  ₹
                                   {product.discount_price
                                     ? product.discount_price
                                     : product.price}
