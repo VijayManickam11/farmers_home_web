@@ -25,7 +25,7 @@ const Header = (props) => {
     const responseData = await CartController.getCartListData();
 
     const parseData = JSON.parse(responseData);
-    console.log(parseData);
+    console.log(parseData,"parseData");
 
     if (parseData.status == "SUCCESS") {
       setCarts(parseData.data.data);
@@ -342,6 +342,7 @@ const Header = (props) => {
   );
 };
 const mapStateToProps = (state) => {
+  console.log(state,"statestate")
   return {
     carts: state.cartList.cart,
   };

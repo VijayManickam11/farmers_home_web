@@ -25,7 +25,7 @@ const HeaderS2 = (props) => {
     const responseData = await CartController.getCartListData();
 
     const parseData = JSON.parse(responseData);
-    console.log(parseData);
+    console.log(parseData,"parseDatahhh");
 
     if (parseData.status == "SUCCESS") {
       setCarts(parseData.data.data);

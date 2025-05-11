@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import HeaderTop from '../../components/HeaderTop/HeaderTop';
 import Navbar from '../../components/Navbar/Navbar';
 import PageTitle from "../../components/pagetitle/PageTitle";
@@ -14,6 +14,8 @@ import {
 } from "../../store/actions/action";
 import Footer from "../../components/footer/Footer";
 import Logo from '../../images/logo.svg'
+import CartController from "../../Controller/CartController";
+import ToastService from "../../util/validationAlerts/toastService";
 
 const CartPage = (props) => {
   const ClickHandler = () => {
@@ -22,7 +24,60 @@ const CartPage = (props) => {
 
   const { carts } = props;
 
-  console.log(carts,"cartscarts")
+   const [cart, setCart] = useState([]);
+  
+    const getCartData = async () => {
+      const responseData = await CartController.getCartListData();
+  
+      const parseData = JSON.parse(responseData);
+      console.log(parseData,"catItem");
+  
+      if (parseData.status == "SUCCESS") {
+        setCart(parseData.data.data);
+      }
+    };
+  
+    useEffect(() => {
+      getCartData();
+    }, []);
+
+    const handleDelete = async (cartUid) => {
+    try {
+      let uid = cartUid;
+      console.log(uid, "productUidDelete");
+      let data = {
+        is_active: true,
+        is_deleted: false,
+      };
+      const res = await CartController.deleteCartList(uid, data);
+      const jsonData = JSON.parse(res);
+      console.log(jsonData, "jsonData");
+      if (jsonData.status === "SUCCESS") {
+        const datas = jsonData?.data;
+        if (datas && datas.type === "success") {
+          ToastService.successmsg(datas.message);
+          // getTheProductDataList();
+          // setTimeout(() => {
+          //   navigate("/products");
+          // }, 3700);
+        } else if (datas.type === "error") {
+          console.error("Failed to delete cart", jsonData);
+          ToastService.errormsg(
+            jsonData?.error?.message || "Failed to delete cart"
+          );
+        }
+      } else if (jsonData.status === "FAILED") {
+        console.error("Failed to delete cart", jsonData);
+        ToastService.errormsg(
+          jsonData?.error?.message || "Failed to delete cart"
+        );
+      }
+    } catch (error) {
+      console.error("Error deleting cart", error);
+      ToastService.errormsg("Error deleting cart");
+    }
+  };
+
 
   return (
     <Fragment>
@@ -48,20 +103,20 @@ const CartPage = (props) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {carts &&
-                          carts.length > 0 &&
-                          carts.map((catItem, crt) => (
+                        {cart &&
+                          cart.length > 0 &&
+                          cart.map((catItem, crt) => (
                             <tr key={crt}>
                               <td className="images">
-                                <img src={catItem.base64Image} alt="base64Image" />
+                                <img src={catItem?.product?.base64Image} alt="base64Image" />
                               </td>
                               <td className="product">
                                 <ul>
                                   <li className="first-cart">
-                                    {catItem.name}
+                                    {catItem?.product?.name}
                                   </li>
-                                  <li>Category : {catItem.category}</li>
-                                  <li>Size : {catItem.size}</li>
+                                  <li>Category : {catItem?.product?.category}</li>
+                                  <li>Size : {catItem?.product?.size}</li>
                                 </ul>
                               </td>
                               <td className="stock">
@@ -70,16 +125,16 @@ const CartPage = (props) => {
                                     <span
                                       className="dec qtybutton"
                                       onClick={() =>
-                                        props.decrementQuantity(catItem.id)
+                                        props.decrementQuantity(catItem?.product?.id)
                                       }
                                     >
                                       -
                                     </span>
-                                    <input value={catItem.qty} type="text" />
+                                    <input value={catItem?.quantity} type="text" />
                                     <span
                                       className="inc qtybutton"
                                       onClick={() =>
-                                        props.incrementQuantity(catItem.id)
+                                        props.incrementQuantity(catItem?.product?.id)
                                       }
                                     >
                                       +
@@ -87,14 +142,14 @@ const CartPage = (props) => {
                                   </Grid>
                                 </div>
                               </td>
-                              <td className="ptice">${catItem.qty * catItem.price}</td>
-                              <td className="stock">${catItem.qty * catItem.price}</td>
+                              <td className="ptice">${catItem?.quantity * catItem?.product?.price}</td>
+                              <td className="stock">${catItem?.quantity * catItem?.product?.price}</td>
                               <td className="action">
                                 <ul>
                                   <li
                                     className="w-btn"
-                                    onClick={() =>
-                                      props.removeFromCart(catItem.id)
+                                    onClick={() => handleDelete(catItem?.cart_uid)
+                                      // props.removeFromCart(catItem?.cart_uid)
                                     }
                                   >
                                     <i className="fi ti-trash"></i>

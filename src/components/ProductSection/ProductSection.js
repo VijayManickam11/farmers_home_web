@@ -18,6 +18,7 @@ const ProductSection = ({ addToCart }) => {
   const [filter, setFilter] = useState("*");
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [category, setCategory] = useState("All");
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -29,7 +30,10 @@ const ProductSection = ({ addToCart }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await AddProductController.getProductListData();
+      let data = {
+        category:category
+      }
+      const response = await AddProductController.getProductListData(data);
 
       const parseData = JSON.parse(response);
 
@@ -44,10 +48,11 @@ const ProductSection = ({ addToCart }) => {
       // setProducts(productsArray);
     };
     fetchProducts();
-  }, []);
+  }, [category]);
 
   const handleFilterChange = (newFilter) => {
-    setFilter(newFilter);
+    setCategory(newFilter);
+    // setFilter(newFilter);
   };
 
   const filteredProducts = products.filter(
@@ -84,7 +89,7 @@ const ProductSection = ({ addToCart }) => {
                       className={`product-btn ${
                         filter === "*" ? "current" : ""
                       }`}
-                      onClick={() => handleFilterChange("*")}
+                      onClick={() => handleFilterChange("All")}
                     >
                       all
                     </button>
@@ -94,7 +99,7 @@ const ProductSection = ({ addToCart }) => {
                       className={`product-btn ${
                         filter === ".fruit" ? "current" : ""
                       }`}
-                      onClick={() => handleFilterChange(".fruit")}
+                      onClick={() => handleFilterChange("fruites")}
                     >
                       fruits
                     </button>
@@ -104,7 +109,7 @@ const ProductSection = ({ addToCart }) => {
                       className={`product-btn ${
                         filter === ".vegetables" ? "current" : ""
                       }`}
-                      onClick={() => handleFilterChange(".vegetables")}
+                      onClick={() => handleFilterChange("vegetables")}
                     >
                       vegetables
                     </button>
@@ -114,9 +119,9 @@ const ProductSection = ({ addToCart }) => {
                       className={`product-btn ${
                         filter === ".milk" ? "current" : ""
                       }`}
-                      onClick={() => handleFilterChange(".milk")}
+                      onClick={() => handleFilterChange("grocery")}
                     >
-                      milk & cream
+                     Grocery
                     </button>
                   </li>
                 </ul>
