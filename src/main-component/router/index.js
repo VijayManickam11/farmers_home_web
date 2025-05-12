@@ -24,6 +24,7 @@ import LoginPage from '../LoginPage/index';
 import ForgotPassword from '../ForgotPassword/index';
 import Register from '../SignUpPage/index';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import ProfilePage from '../../components/Profile/ProfilePage';
 
 
 const AllRoute = () => {
@@ -57,6 +58,7 @@ const AllRoute = () => {
           <Route path="forgot" element={<ForgotPassword />} />
           <Route path="register" element={<Register />} />
           <Route path='404' element={<ErrorPage />} />  
+          <Route path='profilePage' element={<ProfilePage />} />  
        
         </Routes>
       </BrowserRouter>

@@ -6,8 +6,13 @@ import { connect } from "react-redux";
 import { removeFromCart } from "../../store/actions/action";
 import ProfileImage from "../../images/icon/UserProfile.png";
 import CartController from "../../Controller/CartController";
+import { useUser } from "../Context/UserContext";
+import { USER_NAME } from "../../LocalStorage/LocalStorageNames";
 
 const Header = (props) => {
+  const userName = localStorage.getItem(USER_NAME)
+  const { isLoggedIn } = useUser();
+
   const [menuActive, setMenuState] = useState(false);
   const [cartActive, setcartState] = useState(false);
 
@@ -225,7 +230,17 @@ const Header = (props) => {
               </div>
               <div className="col-lg-5 col-md-2 col-2">
                 <div className="header-right">
-                                    <img src={ProfileImage} onClick={() => props.setShowModal(true)} style={{width:"65px",height:"50px"}} alt='profileImage'/>
+                                  {!isLoggedIn ?
+                                (  <img src={ProfileImage} onClick={() => props.setShowModal(true)} style={{width:"65px",height:"50px"}} alt='profileImage'/>)
+                                  : (
+                                    <Link to="/profilePage">
+                                    <img src={ProfileImage}  style={{width:"65px",height:"50px"}} alt='profileImage'/>
+                                  </Link>
+                                  )
+                              }
+                              <div style={{display:"flex",flexDirection:"column",justifyContent:"center",marginRight:"10px"}}>
+                              <p style={{marginTop:"12px"}}>{!isLoggedIn ? "Login" : `${userName}`}</p>
+                              </div>
                   <div className="header-search-form-wrapper">
                     <div className="cart-search-contact">
                       <button

@@ -9,13 +9,19 @@ import PopupQuickview from "../PopupQuickview/PopupQuickview";
 import Shape1 from "../../images/product/shape-1.png";
 import Shape2 from "../../images/product/shape-2.png";
 import AddProductController from "../../Controller/ProductController";
+import CartController from "../../Controller/CartController";
+import { toast } from "react-toastify";
+import { useUser } from "../Context/UserContext";
+import SignUpPage from "../../main-component/SignUpPage";
 
 const ClickHandler = () => {
   window.scrollTo(10, 0);
 };
 
 const ProductSection = ({ addToCart }) => {
+   const { isLoggedIn} = useUser();
   const [filter, setFilter] = useState("*");
+  const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [category, setCategory] = useState("All");
@@ -61,8 +67,23 @@ const ProductSection = ({ addToCart }) => {
       (product.category && product.category.includes(filter.slice(1)))
   );
 
-  const addToCartProduct = (product, quantity = 1) => {
-    addToCart(product, quantity);
+  const addToCartProduct = async (product, quantity = 1) => {
+    // addToCart(product, quantity);
+     if(isLoggedIn){
+        const responseData = await CartController.postAddCart({
+          product_uid: product.product_uid,
+        });
+    
+        const parseData = JSON.parse(responseData);
+        console.log(parseData);
+    
+        if (parseData.status == "SUCCESS") {
+          toast.success(`${product.name} Added to Cart`);
+        }
+      }else{
+        
+         setShowModal(true);
+      }
   };
 
   return (
@@ -97,7 +118,7 @@ const ProductSection = ({ addToCart }) => {
                   <li>
                     <button
                       className={`product-btn ${
-                        filter === ".fruit" ? "current" : ""
+                        filter === "fruites" ? "current" : ""
                       }`}
                       onClick={() => handleFilterChange("fruites")}
                     >
@@ -107,7 +128,7 @@ const ProductSection = ({ addToCart }) => {
                   <li>
                     <button
                       className={`product-btn ${
-                        filter === ".vegetables" ? "current" : ""
+                        filter === "vegetables" ? "current" : ""
                       }`}
                       onClick={() => handleFilterChange("vegetables")}
                     >
@@ -117,11 +138,11 @@ const ProductSection = ({ addToCart }) => {
                   <li>
                     <button
                       className={`product-btn ${
-                        filter === ".milk" ? "current" : ""
+                        filter === "cold pressed oil" ? "current" : ""
                       }`}
-                      onClick={() => handleFilterChange("grocery")}
+                      onClick={() => handleFilterChange("cold pressed oil")}
                     >
-                     Grocery
+                     Cold Pressed Oil
                     </button>
                   </li>
                 </ul>
@@ -229,6 +250,7 @@ const ProductSection = ({ addToCart }) => {
         product={selectedProduct}
         handleCloseClick={handleCloseClick}
       />
+       <SignUpPage open={showModal} onClose={() => setShowModal(false)} />
     </section>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import api from "../../api";
 import { addToCart } from "../../store/actions/action";
@@ -8,11 +8,16 @@ import AddProductController from "../../Controller/ProductController";
 import CartController from "../../Controller/CartController";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import { useUser } from "../Context/UserContext";
+import SignUpPage from "../../main-component/SignUpPage";
 
 const ShopPageSection = ({ addToCart }) => {
+  const navigate = useNavigate();
+  const { isLoggedIn} = useUser();
   const [shopeTab, setShopeTab] = useState(0);
   const [filter, setFilter] = useState("*");
   const [category, setCategory] = useState("All");
+  const [showModal, setShowModal] = useState(false);
 
   const ClickHandler = () => {
     window.scrollTo(10, 0);
@@ -76,6 +81,7 @@ const ShopPageSection = ({ addToCart }) => {
   }, []);
 
   const addToCartProduct = async (product, quantity = 1) => {
+    if(isLoggedIn){
     const responseData = await CartController.postAddCart({
       product_uid: product.product_uid,
     });
@@ -86,6 +92,10 @@ const ShopPageSection = ({ addToCart }) => {
     if (parseData.status == "SUCCESS") {
       toast.success(`${product.name} Added to Cart`);
     }
+  }else{
+    
+     setShowModal(true);
+  }
   };
   return (
 
@@ -134,7 +144,7 @@ const ShopPageSection = ({ addToCart }) => {
               </div>
             </div>
 
-            <div className="container">
+            <div className="container" style={{marginBottom:"10px"}}>
               <div className="product-wrap">
                 <div className="row">
                   <div className="col col-xs-12 sortable-gallery">
@@ -173,11 +183,11 @@ const ShopPageSection = ({ addToCart }) => {
                         <li>
                           <button
                             className={`product-btn ${
-                              filter === ".milk" ? "current" : ""
+                              filter === ".cold pressed oil" ? "current" : ""
                             }`}
-                            onClick={() => handleFilterChange("grocery")}
+                            onClick={() => handleFilterChange("cold pressed oil")}
                           >
-                          Grocery
+                          Cold Pressed Oil
                           </button>
                         </li>
                       </ul>
@@ -415,6 +425,7 @@ const ShopPageSection = ({ addToCart }) => {
         product={selectedProduct}
         handleCloseClick={handleCloseClick}
       />
+       <SignUpPage open={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 };

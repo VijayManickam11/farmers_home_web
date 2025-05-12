@@ -13,11 +13,15 @@ import logo from "../../images/Logo/FarmersHomeLogo.svg"
 import './style.scss';
 import { Box, Dialog, DialogContent, useMediaQuery, useTheme } from '@mui/material';
 import RegisterController from '../../Controller/RegisterController';
+import { useUser } from '../../components/Context/UserContext';
+import { USER_EMAIL, USER_NAME } from '../../LocalStorage/LocalStorageNames';
 
 
 
 
 const LoginPage = ({open, onClose }) => {
+
+    const { setIsLoggedIn } = useUser();
 
     const theme = useTheme();
 
@@ -81,8 +85,15 @@ const LoginPage = ({open, onClose }) => {
             const response = await RegisterController.postUserLogin(formSubmitedData);
 
             const parsedData = JSON.parse(response);
+            console.log(parsedData,"parsedDataLogin")
             if(parsedData.status == "SUCCESS"){
+                const loginData = parsedData?.data?.user;
+                const userName = loginData?.full_name;
+                 const userEmail = loginData?.email;
                 toast.success('Successfully Login...');
+                setIsLoggedIn(true);
+                localStorage.setItem(USER_NAME,userName);
+                localStorage.setItem(USER_EMAIL,userEmail)
                 onClose();
                 setValue({});
             }
