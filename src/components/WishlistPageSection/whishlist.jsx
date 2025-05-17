@@ -10,53 +10,43 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { useUser } from "../Context/UserContext";
 import SignUpPage from "../../main-component/SignUpPage";
-import { USER_UID } from "../../LocalStorage/LocalStorageNames";
 import WhishListController from "../../Controller/WhishListCintroller";
-import { FaHeart } from 'react-icons/fa';
+import { USER_UID } from "../../LocalStorage/LocalStorageNames";
 
-const ShopPageSection = ({ addToCart }) => {
-  const navigate = useNavigate();
+const WhishListPageSection = ({ addToCart }) => {
   const userUid = localStorage.getItem(USER_UID);
-  const { isLoggedIn} = useUser();
-  const [shopeTab, setShopeTab] = useState(0);
-  const [filter, setFilter] = useState("*");
-  const [category, setCategory] = useState("All");
+  console.log(userUid,"userUid")
+  const navigate = useNavigate();  
+  const [shopeTab, setShopeTab] = useState(0); 
   const [showModal, setShowModal] = useState(false);
-  const [wishlistIds, setWishlistIds] = useState([]);
 
   const ClickHandler = () => {
     window.scrollTo(10, 0);
   };
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
-  const handleFilterChange = (newFilter) => {
-  setCategory(newFilter);
-  // setFilter(newFilter);
-  };
+  
 
   useEffect(() => { 
-    
     const fetchProducts = async () => {
-      let data = {
-        category:category
-      }
-      const response = await AddProductController.getProductListData(data);
+     
+      const response = await WhishListController.getViewWhishList(userUid);      
 
       const parseData = JSON.parse(response);
 
-      let productData = parseData?.data?.data;
+      console.log(parseData, "whishListData");
 
-      console.log(productData, "productData");
+      let whishListData = parseData?.data?.wishlist?.products;
+
+      
 
       if (parseData.status == "SUCCESS") {
-        setProducts(productData);
+        setProducts(whishListData);
       }
-      // const productsArray = await api();
-      // setProducts(productsArray);
+      
     };
     fetchProducts();
-  }, [category]);
+  }, []);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -66,111 +56,7 @@ const ShopPageSection = ({ addToCart }) => {
     setSelectedProduct(null);
   };
 
-   const fetchProducts = async () => {
-      const response = await AddProductController.getProductListData();
-
-      const parseData = JSON.parse(response);
-
-      let productData = parseData?.data?.data;
-
-      console.log(productData, "productData");
-
-      if (parseData.status == "SUCCESS") {
-        setProducts(productData);
-      }
-
-      // const productsArray = await api();
-      // setProducts(productsArray);
-    };
-
-  useEffect(() => {
-   
-    fetchProducts();
-  }, []);
-
-  const addToCartProduct = async (product, quantity = 1) => {
-    if(isLoggedIn){
-    const responseData = await CartController.postAddCart({
-      product_uid: product.product_uid,
-    });
-
-    const parseData = JSON.parse(responseData);
-    console.log(parseData);
-
-    if (parseData.status == "SUCCESS") {
-      toast.success(`${product.name} Added to Cart`);
-    }
-  }else{
-    
-     setShowModal(true);
-  }
-  };
-
-  const addToWhishListProduct = async (product) => {
-    
-      if(isLoggedIn){
-      const responseData = await WhishListController.postAddWhishList({
-        userId: userUid,
-        productId: product?._id,
-
-      });
   
-      const parseData = JSON.parse(responseData);
-      console.log(parseData,"postWhishlist");
-  
-      if (parseData.status == "SUCCESS") {
-        toast.success(`${product.name} Added to WhishList`);
-      }
-    }else{
-      
-       setShowModal(true);
-    }
-    };
-
-     useEffect(() => {
-
-    const fetchSelectedWhishList = async () => {
-      
-      const response = await WhishListController.getSelectedWhishList(userUid,"");
-
-      const parseData = JSON.parse(response);
-
-      console.log(parseData, "productDataWishhh");
-
-      let productData = parseData?.data?.productIds;
-     
-
-      if (parseData.status == "SUCCESS") {
-        setWishlistIds(productData);
-      }
-
-      // const productsArray = await api();
-      // setProducts(productsArray);
-    };
-    fetchSelectedWhishList();
-  }, []);
-
-   const deleteSelectedWhishList = async (product) => {
-      
-      const response = await WhishListController.deleteWhishListList("",{userId: userUid,
-        productId: product?._id,
-   });
-
-      const parseData = JSON.parse(response);
-
-      console.log(parseData, "productDataWishhh");
-
-      
-
-      if (parseData.status == "SUCCESS") {
-        toast.success(`Wish List Deleted Successfully`);
-        fetchProducts();
-      }
-
-     
-    };
-
-
   return (
 
 
@@ -218,58 +104,7 @@ const ShopPageSection = ({ addToCart }) => {
               </div>
             </div>
 
-            <div className="container" style={{marginBottom:"10px"}}>
-              <div className="product-wrap">
-                <div className="row">
-                  <div className="col col-xs-12 sortable-gallery">
-                    <div className="gallery-filters">
-                      <ul className="product-filter-btn">
-                        <li>
-                          <button
-                            className={`product-btn ${
-                              filter === "*" ? "current" : ""
-                            }`}
-                            onClick={() => handleFilterChange("All")}
-                          >
-                            all
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className={`product-btn ${
-                              filter === ".fruit" ? "current" : ""
-                            }`}
-                            onClick={() => handleFilterChange("fruites")}
-                          >
-                            fruits
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className={`product-btn ${
-                              filter === ".vegetables" ? "current" : ""
-                            }`}
-                            onClick={() => handleFilterChange("vegetables")}
-                          >
-                            vegetables
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className={`product-btn ${
-                              filter === ".cold pressed oil" ? "current" : ""
-                            }`}
-                            onClick={() => handleFilterChange("cold pressed oil")}
-                          >
-                          Cold Pressed Oil
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
             
             <div className="tab-content">
               {shopeTab === 0 && (
@@ -329,28 +164,13 @@ const ShopPageSection = ({ addToCart }) => {
                           <div className="orico-product-text-hide">
                             <ul className="orico-product-link">
                               <li>
-                                {wishlistIds.includes(product._id) ?
-                                <button
-                                 onClick={() => deleteSelectedWhishList(product)}
-                                   
-                                    style={{backgroundColor:"red"}}
-                                  >
-                                    <i className="fi ti-heart" style={{color:"white"}}></i>
-                                    
-                                  </button> : (
-
-                                    <button
-                                    onClick={() => addToWhishListProduct(product)}
-                                    
-                                  >
-                                    <i className="fi ti-heart"></i>
-                                    
-                                  </button>
-                                  )}
+                                <a href="#">
+                                  <i className="fi ti-heart"></i>
+                                </a>
                               </li>
                               <li>
                                 <button
-                                  onClick={() => addToCartProduct(product)}
+                                  // onClick={() => addToCartProduct(product)}
                                 >
                                   <i
                                     className="fi flaticon-shopping-cart"
@@ -393,7 +213,7 @@ const ShopPageSection = ({ addToCart }) => {
                               data-bs-toggle="tooltip"
                               data-bs-html="true"
                               title="Add to Cart"
-                              onClick={() => addToCartProduct(product)}
+                              // onClick={() => addToCartProduct(product)}
                               className="cart-btn"
                             >
                               Add to Cart
@@ -435,28 +255,13 @@ const ShopPageSection = ({ addToCart }) => {
                             <div className="orico-product-text-hide">
                               <ul className="orico-product-link">
                                 <li>
-                                 {wishlistIds.includes(product._id) ?
-                                <button
-                                onClick={() => deleteSelectedWhishList(product)}
-                                    
-                                    style={{backgroundColor:"red"}}
-                                  >
-                                    <i className="fi ti-heart" style={{color:"white"}}></i>
-                                    
-                                  </button> : (
-
-                                    <button
-                                    
-                                    onClick={() => addToWhishListProduct(product)}
-                                  >
+                                  <a href="#">
                                     <i className="fi ti-heart"></i>
-                                    
-                                  </button>
-                                  )}
+                                  </a>
                                 </li>
                                 <li>
                                   <button
-                                    onClick={() => addToCartProduct(product)}
+                                    // onClick={() => addToCartProduct(product)}
                                   >
                                     <i
                                       className="fi flaticon-shopping-cart"
@@ -534,4 +339,4 @@ const ShopPageSection = ({ addToCart }) => {
   );
 };
 
-export default connect(null, { addToCart })(ShopPageSection);
+export default connect(null, { addToCart })(WhishListPageSection);

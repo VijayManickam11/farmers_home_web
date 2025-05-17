@@ -46,6 +46,11 @@ export const apiEndPoint = {
     PUT_CART_DATA:"/cart/:cart_uid",
     DELETE_CART_DATA:"/cart/:cart_uid",
 
+    GET_WHISH_LIST: "/wishlist/:userId",
+    GET_SELECTED_WHISH_LIST: "/selecetdwishlist/:userId",
+    POST_WHISH_LIST:"/wishlist",   
+    DELETE_WHISH_LIST_DATA:"/wishlist",
+
     USER_REGISTER: "/registerNew",
     USER_LOGIN: "/userLogin"
     

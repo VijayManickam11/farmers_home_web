@@ -156,6 +156,14 @@ const Header = (props) => {
                           </Link>
                         </li>
                         <li>
+                          <Link
+                            onClick={ClickHandler}
+                            to="/whishlist"
+                          >
+                            Whish List
+                          </Link>
+                        </li>
+                        <li>
                           <Link onClick={ClickHandler} to="/cart">
                             Cart
                           </Link>

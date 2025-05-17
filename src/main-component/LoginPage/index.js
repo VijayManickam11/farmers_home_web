@@ -14,7 +14,7 @@ import './style.scss';
 import { Box, Dialog, DialogContent, useMediaQuery, useTheme } from '@mui/material';
 import RegisterController from '../../Controller/RegisterController';
 import { useUser } from '../../components/Context/UserContext';
-import { USER_EMAIL, USER_NAME } from '../../LocalStorage/LocalStorageNames';
+import { USER_EMAIL, USER_NAME, USER_UID } from '../../LocalStorage/LocalStorageNames';
 
 
 
@@ -90,12 +90,16 @@ const LoginPage = ({open, onClose }) => {
                 const loginData = parsedData?.data?.user;
                 const userName = loginData?.full_name;
                  const userEmail = loginData?.email;
+                 const userUid = loginData?.object_id; 
                 toast.success('Successfully Login...');
                 setIsLoggedIn(true);
                 localStorage.setItem(USER_NAME,userName);
-                localStorage.setItem(USER_EMAIL,userEmail)
+                localStorage.setItem(USER_EMAIL,userEmail);
+                localStorage.setItem(USER_UID,userUid);
                 onClose();
                 setValue({});
+            }else{
+                
             }
 
         }catch(error){
