@@ -17,8 +17,8 @@ let WhishListController = {
     return await ApiService.callGET(apiConfig.API_VERSION_1, apiEndPoint.GET_SELECTED_WHISH_LIST.replace(":userId",id), "", data || "");
   },
   
-  async deleteWhishListList(id,data) { 
-    return await ApiService.callDELETE(apiConfig.API_VERSION_1, apiEndPoint.DELETE_WHISH_LIST_DATA, "", data || "");
+  async deleteWhishListList(query,data) { 
+    return await ApiService.callDELETE(apiConfig.API_VERSION_1, apiEndPoint.DELETE_WHISH_LIST_DATA,query, data || "");
   },
  
 };

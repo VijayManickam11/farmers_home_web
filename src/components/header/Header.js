@@ -10,11 +10,20 @@ import { useUser } from "../Context/UserContext";
 import { USER_NAME } from "../../LocalStorage/LocalStorageNames";
 
 const Header = (props) => {
-  const userName = localStorage.getItem(USER_NAME)
+  
   const { isLoggedIn } = useUser();
 
   const [menuActive, setMenuState] = useState(false);
   const [cartActive, setcartState] = useState(false);
+
+  const [userName, setUserName] = useState("");
+  
+  useEffect(() => {    
+      const storedUsername = localStorage.getItem(USER_NAME);
+      if (storedUsername) {
+        setUserName(storedUsername);
+      }
+    }, []);
 
   const SubmitHandler = (e) => {
     e.preventDefault();
