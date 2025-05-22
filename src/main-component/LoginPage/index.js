@@ -93,6 +93,7 @@ const LoginPage = ({open, onClose }) => {
                  const userUid = loginData?.object_id; 
                 toast.success('Successfully Login...');
                 setIsLoggedIn(true);
+                localStorage.setItem("isLoggedIn", "true");
                 localStorage.setItem(USER_NAME,userName);
                 localStorage.setItem(USER_EMAIL,userEmail);
                 localStorage.setItem(USER_UID,userUid);

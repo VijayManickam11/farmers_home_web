@@ -97,6 +97,21 @@ const totalPrice = cart.reduce((acc, item) => {
   return acc + (item?.product?.price * item?.quantity);
 }, 0);
 
+let grandTotal = 0;
+let gstTotalAmount = 0;
+let ecoAmount = 0;
+
+ cart.forEach(item => {
+  const baseTotal = item.product.price * item.quantity;
+  const gstAmount = (item.product.gst_rate / 100) * baseTotal;
+  const ecoTaxTotal = item.product.eco_tax * item.quantity;
+
+  const finalAmount = baseTotal + gstAmount + ecoTaxTotal;
+  gstTotalAmount += gstAmount;
+  ecoAmount += ecoTaxTotal;
+  grandTotal += finalAmount;
+ })
+
 
 
   return (
@@ -208,17 +223,17 @@ const totalPrice = cart.reduce((acc, item) => {
                           </span>
                       </li>
                       <li>
-                        Gst<span>₹0</span>
+                        Gst<span>₹{gstTotalAmount}</span>
                       </li>
                       <li>
-                        Eco Tax<span>₹0</span>
+                        Eco Tax<span>₹{ecoAmount}</span>
                       </li>
                       <li>
                         Delivery Charge<span>₹0</span>
                       </li>
                       <li className="cart-b">
                         Total Price<span>
-                          {totalPrice}
+                          {grandTotal}
                           </span>
                       </li>
                     </ul>

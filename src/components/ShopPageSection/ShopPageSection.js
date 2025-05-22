@@ -35,28 +35,7 @@ const ShopPageSection = ({ addToCart }) => {
   // setFilter(newFilter);
   };
 
-  useEffect(() => { 
-    
-    const fetchProducts = async () => {
-      let data = {
-        category:category
-      }
-      const response = await AddProductController.getProductListData(data);
 
-      const parseData = JSON.parse(response);
-
-      let productData = parseData?.data?.data;
-
-      console.log(productData, "productData");
-
-      if (parseData.status == "SUCCESS") {
-        setProducts(productData);
-      }
-      // const productsArray = await api();
-      // setProducts(productsArray);
-    };
-    fetchProducts();
-  }, [category]);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -86,7 +65,7 @@ const ShopPageSection = ({ addToCart }) => {
   useEffect(() => {
    
     fetchProducts();
-  }, []);
+  }, [category]);
 
   const addToCartProduct = async (product, quantity = 1) => {
     if(isLoggedIn){
@@ -106,6 +85,28 @@ const ShopPageSection = ({ addToCart }) => {
   }
   };
 
+  const fetchSelectedWhishList = async () => {
+      
+      const response = await WhishListController.getSelectedWhishList(userUid,"");
+
+      const parseData = JSON.parse(response);
+
+      console.log(parseData, "productDataWishhh");
+
+      let productData = parseData?.data?.productIds;
+     
+
+      if (parseData.status == "SUCCESS") {
+        setWishlistIds(productData);
+      }
+      
+    };
+
+     useEffect(() => {    
+    fetchSelectedWhishList();
+  }, []);
+
+
   const addToWhishListProduct = async (product) => {
     
       if(isLoggedIn){
@@ -120,6 +121,8 @@ const ShopPageSection = ({ addToCart }) => {
   
       if (parseData.status == "SUCCESS") {
         toast.success(`${product.name} Added to WhishList`);
+        fetchProducts();
+        fetchSelectedWhishList();
       }
     }else{
       
@@ -127,34 +130,14 @@ const ShopPageSection = ({ addToCart }) => {
     }
     };
 
-     useEffect(() => {
-
-    const fetchSelectedWhishList = async () => {
-      
-      const response = await WhishListController.getSelectedWhishList(userUid,"");
-
-      const parseData = JSON.parse(response);
-
-      console.log(parseData, "productDataWishhh");
-
-      let productData = parseData?.data?.productIds;
-     
-
-      if (parseData.status == "SUCCESS") {
-        setWishlistIds(productData);
-      }
-
-      // const productsArray = await api();
-      // setProducts(productsArray);
-    };
-    fetchSelectedWhishList();
-  }, []);
-
+    
    const deleteSelectedWhishList = async (product) => {
-      
-      const response = await WhishListController.deleteWhishListList("",{userId: userUid,
+      const data = {
+        userId: userUid,
         productId: product?._id,
-   });
+       }
+       const query = `?userId=${data.userId}&productId=${data.productId}`;
+      const response = await WhishListController.deleteWhishListList(query,data);
 
       const parseData = JSON.parse(response);
 
@@ -165,6 +148,7 @@ const ShopPageSection = ({ addToCart }) => {
       if (parseData.status == "SUCCESS") {
         toast.success(`Wish List Deleted Successfully`);
         fetchProducts();
+        fetchSelectedWhishList();
       }
 
      
