@@ -308,18 +308,18 @@ const Header = (props) => {
                             <div className="mini-cart-item clearfix" key={crt}>
                               <div className="mini-cart-item-image">
                                 <span>
-                                  <img src={catItem.product.base64Image} alt="icon" />
+                                  <img src={catItem?.product?.base64Image} alt="icon" />
                                 </span>
                               </div>
                               <div className="mini-cart-item-des">
-                                <p>{catItem.product.name} </p>
+                                <p>{catItem?.product?.name} </p>
                                 <span className="mini-cart-item-price">
-                                  ${catItem.product.price} x {catItem.quantity}
+                                  ${catItem?.product?.price} x {catItem?.quantity}
                                 </span>
                                 <span className="mini-cart-item-quantity">
                                   <button
                                     onClick={() =>
-                                      props.removeFromCart(catItem.id)
+                                      props.removeFromCart(catItem?.id)
                                     }
                                     className="btn btn-sm btn-danger"
                                   >

@@ -25,7 +25,7 @@ const CartPage = (props) => {
   const { carts } = props;
 
    const [cart, setCart] = useState([]);
-  
+   const [ productDetails, setProductDetails] = useState([]);
     const getCartData = async () => {
       const responseData = await CartController.getCartListData();
   
@@ -77,6 +77,26 @@ const CartPage = (props) => {
       ToastService.errormsg("Error deleting cart");
     }
   };
+
+  useEffect(() => {
+
+    if(cart && cart.length > 0){
+      const productDetails = cart.map((val, index) =>{
+        return val.product;
+      });
+      
+      
+      setProductDetails(productDetails);
+    }
+
+  }, [cart])
+ console.log(productDetails, "productDetailsproductDetails");
+  
+
+const totalPrice = cart.reduce((acc, item) => {
+  return acc + (item?.product?.price * item?.quantity);
+}, 0);
+
 
 
   return (
@@ -142,7 +162,7 @@ const CartPage = (props) => {
                                   </Grid>
                                 </div>
                               </td>
-                              <td className="ptice">₹{catItem?.quantity * catItem?.product?.price}</td>
+                              <td className="price">₹{catItem?.quantity * catItem?.product?.price}</td>
                               <td className="stock">₹{catItem?.quantity * catItem?.product?.price}</td>
                               <td className="action">
                                 <ul>
@@ -180,15 +200,15 @@ const CartPage = (props) => {
                   <div className="cart-product-list">
                     <ul>
                       <li>
-                        Total product<span>( {carts.length} )</span>
+                        Total product<span>( {cart.length} )</span>
                       </li>
                       <li>
                         Sub Price<span>
-                          {totalPrice(carts)}
+                          {totalPrice}
                           </span>
                       </li>
                       <li>
-                        Vat<span>₹0</span>
+                        Gst<span>₹0</span>
                       </li>
                       <li>
                         Eco Tax<span>₹0</span>
@@ -198,7 +218,7 @@ const CartPage = (props) => {
                       </li>
                       <li className="cart-b">
                         Total Price<span>
-                          {totalPrice(carts)}
+                          {totalPrice}
                           </span>
                       </li>
                     </ul>
