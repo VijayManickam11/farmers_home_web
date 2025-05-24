@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Grid from "@mui/material/Grid";
 import Collapse from "@mui/material/Collapse";
 import FontAwesome from "../../components/UiStyle/FontAwesome";
@@ -16,7 +16,7 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { totalPrice } from "../../utils";
 
 // images
@@ -28,6 +28,7 @@ import paypal from '../../images/checkout/img-1.png';
 import CheckWrap from '../CheckWrap'
 
 import './style.scss';
+import { useSelector } from 'react-redux';
 
 const cardType = [
     {
@@ -87,6 +88,15 @@ const CheckoutSection = ({ cartList }) => {
     });
 
     const [dif_ship, setDif_ship] = React.useState(false);
+    const location = useLocation();
+
+    const { cartItem, amount } = location.state || {};
+
+    const { isLoggedIn, user } = useSelector((state) => state.auth)
+
+    console.log(user, "shdfjhsgdfjhdgfj");
+   
+    
 
     // tabs handler
     function faqHandler(name) {
@@ -95,6 +105,13 @@ const CheckoutSection = ({ cartList }) => {
             billing_adress: false,
             payment: true, [name]: !tabs[name]
         });
+        setForms({
+            ...forms,
+            fname:user.full_name,
+            email:user.email,
+            address:user.address,
+            phone:user.mobileNumber,
+        })
     }
 
     // forms handler
@@ -481,16 +498,16 @@ const CheckoutSection = ({ cartList }) => {
                                                 ))}
                                                 <TableRow className="totalProduct">
                                                     <TableCell>Total product</TableCell>
-                                                    <TableCell align="right">{cartList.length}</TableCell>
+                                                    <TableCell align="right">{amount.productCount}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                     <TableCell>Sub Price</TableCell>
-                                                    <TableCell align="right">${totalPrice(cartList)}</TableCell>
+                                                    <TableCell align="right">₹{amount.subTotal}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                     <TableCell>Total Price</TableCell>
                                                     <TableCell
-                                                        align="right">${totalPrice(cartList)}</TableCell>
+                                                        align="right">₹{amount.totalBillAmount}</TableCell>
                                                 </TableRow>
                                             </TableBody>
                                         </Table>

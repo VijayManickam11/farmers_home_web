@@ -6,6 +6,8 @@ import {
   REMOVE_FROM_WISHLIST,
   REMOVE_FROM_COMPARE_LIST,
   ADD_TO_COMPARE,
+  USER_LOGIN_SUCCESS,
+  USER_LOGOUT
 } from "./type";
 
 export const fetchProductsBegin = () => ({
@@ -76,4 +78,15 @@ export const removeFromCompareList = (product) => (dispatch) => {
     type: REMOVE_FROM_COMPARE_LIST,
     product,
   });
+};
+
+export const loginUserAction = (userData) => (dispatch) =>{
+  dispatch({
+    type: USER_LOGIN_SUCCESS,
+    payload: userData
+  })
+}
+
+export const logoutUserAction = () => (dispatch) => {
+  dispatch({ type: USER_LOGOUT });
 };

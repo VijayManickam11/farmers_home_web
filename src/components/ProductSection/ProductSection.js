@@ -13,6 +13,7 @@ import CartController from "../../Controller/CartController";
 import { toast } from "react-toastify";
 import { useUser } from "../Context/UserContext";
 import SignUpPage from "../../main-component/SignUpPage";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 const ClickHandler = () => {
   window.scrollTo(10, 0);
@@ -25,6 +26,16 @@ const ProductSection = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [category, setCategory] = useState("All");
+  const [ loaderOpen, setLoaderOpen ] = useState(false);
+  const [ gifLoading, setGifLoading ] = useState(false);
+
+  const handleLoaderOpen = () =>{
+    setLoaderOpen(true);
+  }
+
+  const handleLoaderClose = () =>{
+    setLoaderOpen(false);
+  }
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -67,24 +78,37 @@ const ProductSection = ({ addToCart }) => {
       (product.category && product.category.includes(filter.slice(1)))
   );
 
-  const addToCartProduct = async (product, quantity = 1) => {
-    // addToCart(product, quantity);
-     if(isLoggedIn){
-        const responseData = await CartController.postAddCart({
-          product_uid: product.product_uid,
-        });
-    
-        const parseData = JSON.parse(responseData);
-        console.log(parseData);
-    
-        if (parseData.status == "SUCCESS") {
-          toast.success(`${product.name} Added to Cart`);
-        }
-      }else{
-        
-         setShowModal(true);
+    const addToCartProduct = async (product, quantity = 1) => {
+      if (isLoggedIn) {
+        setGifLoading(true); // trigger loader
+
+        // Let React re-render *before* proceeding
+        setTimeout(async () => {
+          try {
+            const responseData = await CartController.postAddCart({
+              product_uid: product.product_uid,
+            });
+
+            const parseData = JSON.parse(responseData);
+            console.log(parseData);
+
+            if (parseData.status === 'SUCCESS') {
+              toast.success(`${product.name} Added to Cart`);
+            } else {
+              toast.error("Failed to add product to cart");
+            }
+          } catch (error) {
+            console.error("Error adding to cart:", error);
+            toast.error("Something went wrong");
+          } finally {
+            setGifLoading(false); // hide loader
+          }
+        }, 2000); // delay by 0ms to give React render time
+      } else {
+        setShowModal(true);
       }
-  };
+    };
+
 
   return (
     <section className="orico-product-section section-padding">
@@ -250,9 +274,24 @@ const ProductSection = ({ addToCart }) => {
         product={selectedProduct}
         handleCloseClick={handleCloseClick}
       />
+
+      <Backdrop sx={{ color:"#fff", zIndex:(theme) => theme.zIndex.drawer +1 }} open={gifLoading}>
+        <dotlottie-player src="https://lottie.host/ae89510e-9dc0-4dc6-ad3d-0b8a16c068f7/eecG1CsXq3.lottie"
+         background="transparent" 
+         speed="1" 
+         style={{width: "200px",height: "200px"}}
+         loop 
+         autoplay>
+        </dotlottie-player>
+      </Backdrop>
+
+
        <SignUpPage open={showModal} onClose={() => setShowModal(false)} />
     </section>
   );
+
 };
+
+
 
 export default connect(null, { addToCart })(ProductSection);

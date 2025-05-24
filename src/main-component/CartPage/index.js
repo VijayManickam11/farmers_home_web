@@ -245,6 +245,14 @@ let ecoAmount = 0;
                           onClick={ClickHandler}
                           className="theme-btn"
                           to="/checkout"
+                          state={{
+                            cartItem: cart,
+                            amount:{
+                              totalBillAmount: grandTotal,
+                              productCount: cart.length,
+                              subTotal: totalPrice
+                            }
+                          }}
                         >
                           Proceed to Checkout{" "}
                         </Link>

@@ -15,11 +15,15 @@ import { Box, Dialog, DialogContent, useMediaQuery, useTheme } from '@mui/materi
 import RegisterController from '../../Controller/RegisterController';
 import { useUser } from '../../components/Context/UserContext';
 import { USER_EMAIL, USER_NAME, USER_UID } from '../../LocalStorage/LocalStorageNames';
+import { useDispatch } from 'react-redux';
+import { loginUserAction } from '../../store/actions/action';
 
 
 
 
 const LoginPage = ({open, onClose }) => {
+
+    const dispatch = useDispatch();
 
     const { setIsLoggedIn } = useUser();
 
@@ -28,6 +32,8 @@ const LoginPage = ({open, onClose }) => {
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const push = useNavigate()
+
+
 
     const [value, setValue] = useState({
         email: 'user@gmail.com',
@@ -91,6 +97,14 @@ const LoginPage = ({open, onClose }) => {
                 const userName = loginData?.full_name;
                  const userEmail = loginData?.email;
                  const userUid = loginData?.object_id; 
+                dispatch(loginUserAction({
+                    uid: loginData.uid,
+                    full_name: loginData.full_name,
+                    email: loginData.email,
+                    role: loginData.role,
+                    address: loginData.address,
+                    mobileNumber: loginData.mobileNumber,
+                }));
                 toast.success('Successfully Login...');
                 setIsLoggedIn(true);
                 localStorage.setItem("isLoggedIn", "true");

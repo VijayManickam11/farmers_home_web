@@ -37,7 +37,7 @@ const Header = (props) => {
 
   const getCartData = async () => {
     const responseData = await CartController.getCartListData();
-
+    
     const parseData = JSON.parse(responseData);
     console.log(parseData,"parseData");
 
