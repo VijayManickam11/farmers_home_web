@@ -36,11 +36,11 @@ const Footer = (props) => {
 
     return (
         <div className={'' + props.hclass}>
-            {FooterShape && (
+            {/* {FooterShape && (
                 <div className="footer-shape">
                     <img src={TopShape} alt="" />
                 </div>
-            )}
+            )} */}
             <footer className="wpo-site-footer" >
                 <div className="wpo-upper-footer">
                     <div className="container">

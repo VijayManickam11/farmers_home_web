@@ -26,6 +26,10 @@ import Register from '../SignUpPage/index';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import ProfilePage from '../../components/Profile/ProfilePage';
 import WhishListPage from '../WhishList';
+import MyOrders from '../OrderRecived/orderPage';
+import MyOrdersLisiting from '../OrderRecived/orderPage';
+import OrdersPageMain from '../OrderRecived/ordersMain';
+import SingleOrderView from '../OrderRecived/ordersView';
 
 
 const AllRoute = () => {
@@ -49,6 +53,8 @@ const AllRoute = () => {
           <Route path='cart' element={<CartPage />} />
           <Route path='checkout' element={<CheckoutPage />} />
           <Route path='order_received' element={<OrderRecived />} />
+          <Route path='orders_listing' element={<OrdersPageMain />} />
+          <Route path='orders_view' element={<SingleOrderView />} />
           <Route path='blog' element={<BlogPage/>} />
           <Route path='blog-left-sidebar' element={<BlogPageLeft />} />
           <Route path='blog-fullwidth' element={<BlogPageFullwidth />} />
