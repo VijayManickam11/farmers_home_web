@@ -96,9 +96,9 @@ const LoginPage = ({open, onClose }) => {
                 const loginData = parsedData?.data?.user;
                 const userName = loginData?.full_name;
                  const userEmail = loginData?.email;
-                 const userUid = loginData?.object_id; 
+                 const userUid = loginData?.user_uid; 
                 dispatch(loginUserAction({
-                    uid: loginData.uid,
+                    uid: loginData.user_uid,
                     full_name: loginData.full_name,
                     email: loginData.email,
                     role: loginData.role,

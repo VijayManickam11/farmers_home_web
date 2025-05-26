@@ -6,10 +6,12 @@ import { connect } from "react-redux";
 import { removeFromCart } from "../../store/actions/action";
 import CartController from "../../Controller/CartController";
 import { toast } from "react-toastify";
+import { USER_UID } from "../../LocalStorage/LocalStorageNames";
 
 const HeaderS2 = (props) => {
   const [menuActive, setMenuState] = useState(false);
   const [cartActive, setcartState] = useState(false);
+  const user_uid = localStorage.getItem(USER_UID);
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -22,10 +24,10 @@ const HeaderS2 = (props) => {
   const [carts, setCarts] = useState([]);
 
   const getCartData = async () => {
-    const responseData = await CartController.getCartListData();
+    const responseData = await CartController.getCartListData(user_uid);
 
     const parseData = JSON.parse(responseData);
-    console.log(parseData,"parseDatahhh");
+    console.log(parseData, "parseDatahhh");
 
     if (parseData.status == "SUCCESS") {
       setCarts(parseData.data.data);
@@ -284,7 +286,10 @@ const HeaderS2 = (props) => {
                             <div className="mini-cart-item clearfix" key={crt}>
                               <div className="mini-cart-item-image">
                                 <span>
-                                  <img src={catItem.product.base64Image} alt="icon" />
+                                  <img
+                                    src={catItem.product.base64Image}
+                                    alt="icon"
+                                  />
                                 </span>
                               </div>
                               <div className="mini-cart-item-des">

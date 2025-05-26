@@ -40,14 +40,14 @@ export const apiEndPoint = {
     PUT_PRODUCT_DATA:"/product/:product_uid",
     DELETE_PRODUCT_DATA:"/product/:product_uid",
     
-    GET_CART_LIST: "/carts",
+    GET_CART_LIST: "/carts/:user_uid",
     POST_CART:"/cart",
     GET_THE_SINGLE_CART:"/cart/:cart_uid",
     PUT_CART_DATA:"/cart/:cart_uid",
     DELETE_CART_DATA:"/cart/:cart_uid",
 
-    GET_WHISH_LIST: "/wishlist/:userId",
-    GET_SELECTED_WHISH_LIST: "/selecetdwishlist/:userId",
+    GET_WHISH_LIST: "/wishlist/:user_uid",
+    GET_SELECTED_WHISH_LIST: "/selecetdwishlist/:user_uid",
     POST_WHISH_LIST:"/wishlist",   
     DELETE_WHISH_LIST_DATA:"/wishlist",
 
