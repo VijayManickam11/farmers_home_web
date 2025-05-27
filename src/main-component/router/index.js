@@ -30,6 +30,7 @@ import MyOrders from '../OrderRecived/orderPage';
 import MyOrdersLisiting from '../OrderRecived/orderPage';
 import OrdersPageMain from '../OrderRecived/ordersMain';
 import SingleOrderView from '../OrderRecived/ordersView';
+import CheckoutButton from '../../components/CheckoutSection/checkout';
 
 
 const AllRoute = () => {
@@ -51,7 +52,8 @@ const AllRoute = () => {
           <Route path="shop" element={<ShopPage />} />
           <Route path='shop-single/:slug' element={<ProductSinglePage />} />
           <Route path='cart' element={<CartPage />} />
-          <Route path='checkout' element={<CheckoutPage />} />
+          {/* <Route path='checkout' element={<CheckoutPage />} /> */}
+          <Route path='checkout' element={<CheckoutButton />} />
           <Route path='order_received' element={<OrderRecived />} />
           <Route path='orders_listing' element={<OrdersPageMain />} />
           <Route path='orders_view' element={<SingleOrderView />} />

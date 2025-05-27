@@ -52,7 +52,10 @@ export const apiEndPoint = {
     DELETE_WHISH_LIST_DATA:"/wishlist",
 
     USER_REGISTER: "/registerNew",
-    USER_LOGIN: "/userLogin"
+    USER_LOGIN: "/userLogin",
+
+    POST_PAYMENT_ORDER: "/create-order",
+    POST_PAYMENT_VERIFY: "/verify"
     
 };
 

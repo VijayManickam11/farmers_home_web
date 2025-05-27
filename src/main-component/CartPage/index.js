@@ -250,7 +250,8 @@ let ecoAmount = 0;
                             amount:{
                               totalBillAmount: grandTotal,
                               productCount: cart.length,
-                              subTotal: totalPrice
+                              subTotal: totalPrice,
+                              currency:"INR"
                             }
                           }}
                         >
