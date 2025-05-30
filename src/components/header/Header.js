@@ -7,23 +7,23 @@ import { removeFromCart } from "../../store/actions/action";
 import ProfileImage from "../../images/icon/UserProfile.png";
 import CartController from "../../Controller/CartController";
 import { useUser } from "../Context/UserContext";
-import { USER_NAME } from "../../LocalStorage/LocalStorageNames";
+import { USER_NAME, USER_UID } from "../../LocalStorage/LocalStorageNames";
 
 const Header = (props) => {
-  
   const { isLoggedIn } = useUser();
 
   const [menuActive, setMenuState] = useState(false);
   const [cartActive, setcartState] = useState(false);
+  const user_uid = localStorage.getItem(USER_UID);
 
   const [userName, setUserName] = useState("");
-  
-  useEffect(() => {    
-      const storedUsername = localStorage.getItem(USER_NAME);
-      if (storedUsername) {
-        setUserName(storedUsername);
-      }
-    }, []);
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem(USER_NAME);
+    if (storedUsername) {
+      setUserName(storedUsername);
+    }
+  }, []);
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -36,10 +36,10 @@ const Header = (props) => {
   const [carts, setCarts] = useState([]);
 
   const getCartData = async () => {
-    const responseData = await CartController.getCartListData();
-    
+    const responseData = await CartController.getCartListData(user_uid);
+
     const parseData = JSON.parse(responseData);
-    console.log(parseData,"parseData");
+    console.log(parseData, "parseData");
 
     if (parseData.status == "SUCCESS") {
       setCarts(parseData.data.data);
@@ -165,10 +165,7 @@ const Header = (props) => {
                           </Link>
                         </li>
                         <li>
-                          <Link
-                            onClick={ClickHandler}
-                            to="/whishlist"
-                          >
+                          <Link onClick={ClickHandler} to="/whishlist">
                             Whish List
                           </Link>
                         </li>
@@ -247,17 +244,34 @@ const Header = (props) => {
               </div>
               <div className="col-lg-5 col-md-2 col-2">
                 <div className="header-right">
-                                  {!isLoggedIn ?
-                                (  <img src={ProfileImage} onClick={() => props.setShowModal(true)} style={{width:"65px",height:"50px"}} alt='profileImage'/>)
-                                  : (
-                                    <Link to="/profilePage">
-                                    <img src={ProfileImage}  style={{width:"65px",height:"50px"}} alt='profileImage'/>
-                                  </Link>
-                                  )
-                              }
-                              <div style={{display:"flex",flexDirection:"column",justifyContent:"center",marginRight:"10px"}}>
-                              <p style={{marginTop:"12px"}}>{!isLoggedIn ? "Login" : `${userName}`}</p>
-                              </div>
+                  {!isLoggedIn ? (
+                    <img
+                      src={ProfileImage}
+                      onClick={() => props.setShowModal(true)}
+                      style={{ width: "65px", height: "50px" }}
+                      alt="profileImage"
+                    />
+                  ) : (
+                    <Link to="/profilePage">
+                      <img
+                        src={ProfileImage}
+                        style={{ width: "65px", height: "50px" }}
+                        alt="profileImage"
+                      />
+                    </Link>
+                  )}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      marginRight: "10px",
+                    }}
+                  >
+                    <p style={{ marginTop: "12px" }}>
+                      {!isLoggedIn ? "Login" : `${userName}`}
+                    </p>
+                  </div>
                   <div className="header-search-form-wrapper">
                     <div className="cart-search-contact">
                       <button
@@ -317,13 +331,17 @@ const Header = (props) => {
                             <div className="mini-cart-item clearfix" key={crt}>
                               <div className="mini-cart-item-image">
                                 <span>
-                                  <img src={catItem?.product?.base64Image} alt="icon" />
+                                  <img
+                                    src={catItem?.product?.base64Image}
+                                    alt="icon"
+                                  />
                                 </span>
                               </div>
                               <div className="mini-cart-item-des">
                                 <p>{catItem?.product?.name} </p>
                                 <span className="mini-cart-item-price">
-                                  ${catItem?.product?.price} x {catItem?.quantity}
+                                  ${catItem?.product?.price} x{" "}
+                                  {catItem?.quantity}
                                 </span>
                                 <span className="mini-cart-item-quantity">
                                   <button
@@ -341,7 +359,7 @@ const Header = (props) => {
                       </div>
                       <div className="mini-cart-action clearfix">
                         <span className="mini-checkout-price">
-                          Subtotal: 
+                          Subtotal:
                           <span> {totalPrice(carts)}</span>
                         </span>
                         <div className="mini-btn">
@@ -374,7 +392,7 @@ const Header = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state,"statestate")
+  console.log(state, "statestate");
   return {
     carts: state.cartList.cart,
   };

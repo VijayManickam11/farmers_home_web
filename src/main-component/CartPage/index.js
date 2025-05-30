@@ -23,11 +23,12 @@ const CartPage = (props) => {
   };
 
   const { carts } = props;
-
+   const userLoginUid = localStorage.getItem("loginUserUid");
    const [cart, setCart] = useState([]);
-   const [ productDetails, setProductDetails] = useState([]);
-    const getCartData = async () => {
-      const responseData = await CartController.getCartListData();
+   const [ productDetails, setProductDetails] = useState([]);   
+
+    const getCartData = async (userLoginUid) => {
+      const responseData = await CartController.getCartListData(userLoginUid);
   
       const parseData = JSON.parse(responseData);
       console.log(parseData,"catItem");
@@ -38,8 +39,11 @@ const CartPage = (props) => {
     };
   
     useEffect(() => {
-      getCartData();
-    }, []);
+      if(userLoginUid.length > 0){
+        getCartData(userLoginUid);
+      }
+      
+    }, [userLoginUid]);
 
     const handleDelete = async (cartUid) => {
     try {

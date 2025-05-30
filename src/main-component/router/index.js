@@ -52,8 +52,8 @@ const AllRoute = () => {
           <Route path="shop" element={<ShopPage />} />
           <Route path='shop-single/:slug' element={<ProductSinglePage />} />
           <Route path='cart' element={<CartPage />} />
-          {/* <Route path='checkout' element={<CheckoutPage />} /> */}
-          <Route path='checkout' element={<CheckoutButton />} />
+          <Route path='checkout' element={<CheckoutPage />} />
+          {/* <Route path='checkout' element={<CheckoutButton />} /> */}
           <Route path='order_received' element={<OrderRecived />} />
           <Route path='orders_listing' element={<OrdersPageMain />} />
           <Route path='orders_view' element={<SingleOrderView />} />

@@ -28,6 +28,8 @@ const ProductSection = ({ addToCart }) => {
   const [category, setCategory] = useState("All");
   const [ loaderOpen, setLoaderOpen ] = useState(false);
   const [ gifLoading, setGifLoading ] = useState(false);
+  const userLoginUid = localStorage.getItem("loginUserUid");
+  
 
   const handleLoaderOpen = () =>{
     setLoaderOpen(true);
@@ -78,7 +80,7 @@ const ProductSection = ({ addToCart }) => {
       (product.category && product.category.includes(filter.slice(1)))
   );
 
-    const addToCartProduct = async (product, quantity = 1) => {
+    const addToCartProduct = async (product, userLoginUid, quantity = 1) => {
       if (isLoggedIn) {
         setGifLoading(true); // trigger loader
 
@@ -87,6 +89,7 @@ const ProductSection = ({ addToCart }) => {
           try {
             const responseData = await CartController.postAddCart({
               product_uid: product.product_uid,
+              user_uid: userLoginUid
             });
 
             const parseData = JSON.parse(responseData);
@@ -226,7 +229,7 @@ const ProductSection = ({ addToCart }) => {
                               </a>
                             </li>
                             <li>
-                              <button onClick={() => addToCartProduct(product)}>
+                              <button onClick={() => addToCartProduct(product, userLoginUid)}>
                                 <i
                                   className="fi flaticon-shopping-cart"
                                   aria-hidden="true"
@@ -256,7 +259,7 @@ const ProductSection = ({ addToCart }) => {
                             </ul>
                           </div>
                           <button
-                            onClick={() => addToCartProduct(product)}
+                            onClick={() => addToCartProduct(product, userLoginUid)}
                             className="cart-btn"
                           >
                             Add to Cart

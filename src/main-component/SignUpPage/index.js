@@ -13,9 +13,15 @@ import logo from "../../images/Logo/FarmersHomeLogo.svg"
       
 
 // import './style.scss';
-import { Box, Dialog, DialogContent, DialogTitle, useMediaQuery, useTheme } from '@mui/material';   
+import { Autocomplete, Box, Dialog, DialogContent, DialogTitle, useMediaQuery, useTheme } from '@mui/material';   
 import LoginPage from '../LoginPage';
 import RegisterController from '../../Controller/RegisterController';
+
+
+const tamilNaduDistricts = [
+  "Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Salem",
+  "Tirunelveli", "Vellore", "Erode", "Thoothukudi", "Dindigul"
+];
 
 const SignUpPage = ({open, onClose }) => {
 
@@ -25,12 +31,17 @@ const SignUpPage = ({open, onClose }) => {
     const push = useNavigate()
 
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [district, setDistrict] = useState(null);
+    const [areas, setAreas] = useState([]);
 
     const [value, setValue] = useState({
         email: '',
         full_name: '',
         mobileNumber:"",
         address:"",
+        district: "",
+        area: "",
+        pincode: "",
         password: '',
         confirm_password: '',
     });
@@ -44,6 +55,24 @@ const SignUpPage = ({open, onClose }) => {
         className: 'errorMessage'
     }));
 
+    const fetchAreas = async (districtName) => {
+        try {
+        const response = await fetch(`https://api.postalpincode.in/postoffice/${districtName}`);
+        const data = await response.json();
+        if (data[0].Status === "Success") {
+            const areaList = data[0].PostOffice.map((po) => ({
+            name: po.Name,
+            pincode: po.Pincode
+            }));
+            setAreas(areaList);
+        } else {
+            setAreas([]);
+        }
+        } catch (error) {
+        console.error("Error fetching areas:", error);
+        }
+    };
+
     const submitForm = async (e) =>{
         e.preventDefault();
         try{
@@ -53,6 +82,9 @@ const SignUpPage = ({open, onClose }) => {
                 email: value.email,
                 mobile_number: value.mobileNumber,
                 user_address: value.address,
+                user_district: value.district,
+                user_area: value.area,
+                user_pincode: value.pincode,
                 password: value.password,
                 confirm_password: value.confirm_password
             }            
@@ -165,6 +197,50 @@ const SignUpPage = ({open, onClose }) => {
                                 onChange={(e) => changeHandler(e)}
                             />
                             {validator.message('address', value.address, 'required|email')}
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Autocomplete
+                                size='small'
+                                options={tamilNaduDistricts}
+                                value={value.district}
+                                onChange={(e, newValue) => {
+                                setValue({ ...value, district: newValue, area: "", pincode: "" });
+                                if (newValue) fetchAreas(newValue);
+                                }}
+                                renderInput={(params) => <TextField {...params} label="Select District" variant="outlined" />}
+                                sx={{ mb: 2 }}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Autocomplete
+                                size='small'
+                                options={areas}
+                                getOptionLabel={(option) => option.name}
+                                value={value.area ? areas.find(a => a.name === value.area) : null}
+                                onChange={(e, newValue) => {
+                                setValue({
+                                    ...value,
+                                    area: newValue?.name || "",
+                                    pincode: newValue?.pincode || ""
+                                })
+                                }}
+                                renderInput={(params) => <TextField {...params} label="Select Area" variant="outlined" />}
+                                disabled={!value.district}
+                                sx={{ mb: 2 }}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                className="inputOutline"
+                                fullWidth
+                                size='small'
+                                placeholder="Pincode"
+                                value={value.pincode}
+                                variant="outlined"
+                                name="pincode"
+                                label="Pincode"
+                                InputProps={{ readOnly: true }}
+                            />
                         </Grid>
                         <Grid item xs={6}>
                             <TextField

@@ -9,8 +9,8 @@ let CartController = {
     return await ApiService.callPOST(apiConfig.API_VERSION_1, apiEndPoint.POST_CART, "", data);
   },
 
-  async getCartListData(data) {
-    return await ApiService.callGET(apiConfig.API_VERSION_1, apiEndPoint.GET_CART_LIST, "", data || "");
+  async getCartListData(user_uid, data) {
+    return await ApiService.callGET(apiConfig.API_VERSION_1, apiEndPoint.GET_CART_LIST.replace(":user_uid", user_uid), "", data || "");
   },
 
   async getViewAndEditCart(id, data) {

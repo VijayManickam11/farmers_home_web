@@ -5,10 +5,15 @@ import {toast} from "react-toastify";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
+import PaymentController from "../../Controller/paymentController";
+import ToastService from "../../util/validationAlerts/toastService";
 
 import './style.scss';
 
-const CheckWrap = (props) => {
+const CheckWrap = ({amount}) => {
+
+    console.log(amount, "amountamount");
+    
 
     const push = useNavigate()
 
@@ -32,39 +37,78 @@ const CheckWrap = (props) => {
         className: 'errorMessage'
     }));
 
-    const submitForm = (e) => {
-        e.preventDefault();
-        if (validator.allValid()) {
-            setValue({
-                email: '',
-                password: '',
-                card_holder: '',
-                card_number: '',
-                cvv: '',
-                expire_date: '',
-                remember: false
-            });
-            validator.hideMessages();
+    // const submitForm = (e) => {
+    //     e.preventDefault();
+    //     if (validator.allValid()) {
+    //         setValue({
+    //             email: '',
+    //             password: '',
+    //             card_holder: '',
+    //             card_number: '',
+    //             cvv: '',
+    //             expire_date: '',
+    //             remember: false
+    //         });
+    //         validator.hideMessages();
 
-            const userRegex = /^user+.*/gm;
-            const email = value.email;
+    //         const userRegex = /^user+.*/gm;
+    //         const email = value.email;
 
-            if (email.match(userRegex)) {
-                toast.success('Order Recived sucessfully!');
-                push('/order_received');
-            }  else {
-                toast.info('user not existed!');
-                alert('user not existed! credential is : user@*****.com | vendor@*****.com | admin@*****.com');
-            }
-        } else {
-            validator.showMessages();
-            toast.error('Empty field is not allowed!');
-        }
+    //         if (email.match(userRegex)) {
+    //             toast.success('Order Recived sucessfully!');
+    //             push('/order_received');
+    //         }  else {
+    //             toast.info('user not existed!');
+    //             alert('user not existed! credential is : user@*****.com | vendor@*****.com | admin@*****.com');
+    //         }
+    //     } else {
+    //         validator.showMessages();
+    //         toast.error('Empty field is not allowed!');
+    //     }
+    // };
+
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+    await submitForm();
     };
+
+
+    const submitForm = async(e) =>{
+        try{
+
+            const res = await PaymentController.postPaymentOrder({
+                amount: amount?.totalBillAmount,
+                currency: amount?.currency,
+                receipt:`receipt_${Date.now()}`,
+            });
+            
+            const parsRes = JSON.parse(res)
+            const options = {
+                key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+                amount: parsRes.data.data.amount,
+                currency: parsRes.data.data.currency,
+                name: "The Farmer's Home",
+                description: "Test Transaction",
+                order_id: parsRes.data.dataid, // <- REQUIRED!
+                handler: async (res) => {                    
+                    const verifyRes = await PaymentController.postPaymentVerified(res);
+                    ToastService.successmsg(verifyRes.data.message);
+                },
+                theme: { color: "#3399cc" }
+            };
+
+            const razor = new window.Razorpay(options);
+            razor.open();
+
+        }catch(error){
+            console.log(error);
+            
+        }
+    }
     return (
         <Grid className="cardbp mt-20">
             <Grid>
-                <form onSubmit={submitForm}>
+                <form onSubmit={handleSubmit}>
                     <Grid container spacing={3}>
                         <Grid item sm={6} xs={12}>
                             <TextField
@@ -124,7 +168,10 @@ const CheckWrap = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <Grid className="formFooter mt-20">
-                                <Button fullWidth className="cBtn cBtnLarge cBtnTheme mt-20" type="submit">Proceed to Checkout</Button>
+                                <Button fullWidth className="cBtn cBtnLarge cBtnTheme mt-20" 
+                                type="submit"
+                                // onClick={loadRazorpay}
+                                >Proceed to Checkout</Button>
                             </Grid>
                         </Grid>
                     </Grid>

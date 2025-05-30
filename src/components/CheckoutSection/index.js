@@ -25,6 +25,7 @@ import mastercard from '../../images/checkout/img-2.png';
 import skrill from '../../images/checkout/img-3.png';
 import paypal from '../../images/checkout/img-1.png';
 
+  
 import CheckWrap from '../CheckWrap'
 
 import './style.scss';
@@ -51,6 +52,8 @@ const cardType = [
 
 
 const CheckoutSection = ({ cartList }) => {
+    const location = useLocation();
+    const { cartItem, amount } = location.state || {};
     // states
     const [tabs, setExpanded] = React.useState({
         cupon: false,
@@ -69,7 +72,7 @@ const CheckoutSection = ({ cartList }) => {
         phone: '',
         note: '',
 
-        payment_method: 'cash',
+        payment_method: 'card',
         card_type: '',
 
         fname2: '',
@@ -88,9 +91,6 @@ const CheckoutSection = ({ cartList }) => {
     });
 
     const [dif_ship, setDif_ship] = React.useState(false);
-    const location = useLocation();
-
-    const { cartItem, amount } = location.state || {};
 
     const { isLoggedIn, user } = useSelector((state) => state.auth)
 
@@ -118,6 +118,39 @@ const CheckoutSection = ({ cartList }) => {
     const changeHandler = e => {
         setForms({ ...forms, [e.target.name]: e.target.value })
     };
+
+    // const loadRazorpay = async() =>{
+    //     try{
+
+    //         const res = await PaymentController.postPaymentOrder({
+    //             amount: amount.totalBillAmount,
+    //             currency: amount.currency,
+    //             receipt:`receipt_${Date.now()}`,
+    //         });
+            
+    //         const parsRes = JSON.parse(res)
+    //         const options = {
+    //             key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+    //             amount: parsRes.data.data.amount,
+    //             currency: parsRes.data.data.currency,
+    //             name: "The Farmer's Home",
+    //             description: "Test Transaction",
+    //             order_id: parsRes.data.dataid, // <- REQUIRED!
+    //             handler: async (res) => {                    
+    //                 const verifyRes = await PaymentController.postPaymentVerified(res);
+    //                 ToastService.successmsg(verifyRes.data.message);
+    //             },
+    //             theme: { color: "#3399cc" }
+    //         };
+
+    //         const razor = new window.Razorpay(options);
+    //         razor.open();
+
+    //     }catch(error){
+    //         console.log(error);
+            
+    //     }
+    // }
 
 
     return (
@@ -450,13 +483,13 @@ const CheckoutSection = ({ cartList }) => {
                                             name="payment_method"
                                             value={forms.payment_method}
                                             onChange={(e) => changeHandler(e)}>
-                                            <FormControlLabel value="cash" control={<Radio color="primary" />}
-                                                label="Payment By Card " />
                                             <FormControlLabel value="card" control={<Radio color="primary" />}
+                                                label="Payment By Card " />
+                                            <FormControlLabel value="cash" control={<Radio color="primary" />}
                                                 label="Cash On delivery" />
 
                                         </RadioGroup>
-                                        <Collapse in={forms.payment_method === 'cash'} timeout="auto">
+                                        <Collapse in={forms.payment_method === 'card'} timeout="auto">
                                             <Grid className="cardType">
                                                 {cardType.map((item, i) => (
                                                     <Grid
@@ -468,12 +501,16 @@ const CheckoutSection = ({ cartList }) => {
                                                 ))}
                                             </Grid>
                                             <Grid>
-                                                <CheckWrap />
+                                                <CheckWrap amount={amount}/>
                                             </Grid>
                                         </Collapse>
-                                        <Collapse in={forms.payment_method === 'card'} timeout="auto">
+                                        <Collapse in={forms.payment_method === 'cash'} timeout="auto">
                                             <Grid className="cardType">
-                                                <Link to='/order_received' className="cBtn cBtnLarge cBtnTheme mt-20" type="submit">Proceed to Checkout</Link>
+                                                <Button 
+                                                to='/order_received' 
+                                                className="cBtn cBtnLarge cBtnTheme mt-20" 
+                                                type="submit"
+                                                >Proceed to Checkout</Button>
                                             </Grid>
                                         </Collapse>
                                     </Collapse>
@@ -498,16 +535,16 @@ const CheckoutSection = ({ cartList }) => {
                                                 ))}
                                                 <TableRow className="totalProduct">
                                                     <TableCell>Total product</TableCell>
-                                                    <TableCell align="right">{amount.productCount}</TableCell>
+                                                    <TableCell align="right">{amount?.productCount}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                     <TableCell>Sub Price</TableCell>
-                                                    <TableCell align="right">₹{amount.subTotal}</TableCell>
+                                                    <TableCell align="right">₹{amount?.subTotal}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                     <TableCell>Total Price</TableCell>
                                                     <TableCell
-                                                        align="right">₹{amount.totalBillAmount}</TableCell>
+                                                        align="right">₹{amount?.totalBillAmount}</TableCell>
                                                 </TableRow>
                                             </TableBody>
                                         </Table>

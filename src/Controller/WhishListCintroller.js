@@ -10,11 +10,11 @@ let WhishListController = {
   },
   
   async getViewWhishList(id, data) {
-    return await ApiService.callGET(apiConfig.API_VERSION_1, apiEndPoint.GET_WHISH_LIST.replace(":userId",id), "", data || "");
+    return await ApiService.callGET(apiConfig.API_VERSION_1, apiEndPoint.GET_WHISH_LIST.replace(":user_uid",id), "", data || "");
   },
 
    async getSelectedWhishList(id, data) {
-    return await ApiService.callGET(apiConfig.API_VERSION_1, apiEndPoint.GET_SELECTED_WHISH_LIST.replace(":userId",id), "", data || "");
+    return await ApiService.callGET(apiConfig.API_VERSION_1, apiEndPoint.GET_SELECTED_WHISH_LIST.replace(":user_uid",id), "", data || "");
   },
   
   async deleteWhishListList(query,data) { 
